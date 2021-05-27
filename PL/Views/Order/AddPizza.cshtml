@@ -1,0 +1,41 @@
+﻿@model PL.Models.PizzaAccountingViewModel
+@{
+    ViewBag.Title = "Add pizza";
+}
+<h2>@ViewBag.TItle</h2>
+<hr />
+@using (Html.BeginForm("AddPizza", "Order", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+<fieldset>
+    @Html.HiddenFor(m => m.PizzaObject.Id)
+    @Html.HiddenFor(m => m.PizzaObject.Name)
+    @Html.HiddenFor(m => m.PizzaObject.Price)
+    @Html.HiddenFor(m => m.PizzaObject.Image)
+
+    <div class="float-left col-sm-4">
+        <img src="@Model.PizzaObject.Image" width="310" height="310" alt="No image">
+    </div>
+
+    <p>
+        @Html.LabelFor(m => m.PizzaObject.Name, "Name")
+        <br />
+        @Model.PizzaObject.Name
+    </p>
+    <p>
+        @Html.LabelFor(m => m.PizzaObject.Price, "Price")
+        <br />
+        @Model.PizzaObject.Price $
+    </p>
+
+    <p>
+        @Html.LabelFor(m => m.Quantity, "Quantity")
+        <br />
+        @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Quantity, "", new { @class = "text-danger" })
+
+    </p>
+    @Html.ActionLink("Go back", "Create", "Order", null, new { @class = "btn btn-dark btn-lg" })
+    <input type="submit" value="Add pizza" class="btn btn-warning btn-lg" />
+</fieldset>
+}

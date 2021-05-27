@@ -1,0 +1,1275 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SobaScript</name>
+    </assembly>
+    <members>
+        <member name="F:net.r_eg.SobaScript.Components.ComponentAbstract.soba">
+            <summary>
+            Activated SobaScript engine.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Components.ComponentAbstract.emsbuild">
+            <summary>
+            Activated E-MSBuild engine.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Components.ComponentAbstract.uvars">
+            <summary>
+            Container of user-variables through Varhead.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Components.ComponentAbstract.Activator">
+            <summary>
+            Expression when to start processing.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Components.ComponentAbstract.Eval(System.String)">
+            <summary>
+            Prepare, parse, and evaluate mixed data through SobaScript supported syntax.
+            </summary>
+            <param name="data">Mixed input data.</param>
+            <returns>Evaluated end value.</returns>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Components.ComponentAbstract.Enabled">
+            <summary>
+            An activation status of this component.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Components.ComponentAbstract.PostProcessing">
+            <summary>
+            Allows post-processing with used evaluator engine.
+            Some components may require immediate processing with evaluation before passing control to the next level.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Components.ComponentAbstract.BeforeDeepening">
+            <summary>
+            Will be located before deepening if true.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Components.ComponentAbstract.PostParse">
+            <summary>
+            To force post-analysis.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Components.ComponentAbstract.ARegex">
+            <summary>
+            Using regex engine in {Activator}.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Components.ComponentAbstract.#ctor(net.r_eg.SobaScript.ISobaScript)">
+            <param name="soba">Used SobaScript engine.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Components.ComponentAbstract.#ctor(net.r_eg.SobaScript.ISobaScript,net.r_eg.SobaScript.IEvMSBuildMaker,net.r_eg.Varhead.IUVars)">
+            <param name="soba">Used SobaScript engine.</param>
+            <param name="evmaker">Custom maker of the E-MSBuild engine.</param>
+            <param name="uvars">Varhead container.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Components.ComponentAbstract.#ctor(net.r_eg.SobaScript.ISobaScript,net.r_eg.EvMSBuild.IEvMSBuild,net.r_eg.Varhead.IUVars)">
+            <param name="soba">Used SobaScript engine.</param>
+            <param name="evm">E-MSBuild engine.</param>
+            <param name="uvars">Varhead container.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Components.ComponentAbstract.EntryPoint(System.String,System.Text.RegularExpressions.RegexOptions)">
+            <summary>
+            Default entry point to start analysis.
+            </summary>
+            <param name="data">Raw data.</param>
+            <param name="opt">Additional options to engine.</param>
+            <returns></returns>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Components.IComponent.Enabled">
+            <summary>
+            An activation status of this component.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Components.IComponent.Activator">
+            <summary>
+            Expression when to start processing.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Components.IComponent.ARegex">
+            <summary>
+            Using regex engine in {Activator}.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Components.IComponent.PostProcessing">
+            <summary>
+            Allows post-processing with used evaluator engine.
+            Some components may require immediate processing with evaluation before passing control to the next level.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Components.IComponent.BeforeDeepening">
+            <summary>
+            Will be located before deepening if true.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Components.IComponent.PostParse">
+            <summary>
+            To force post-analysis.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Components.IComponent.Eval(System.String)">
+            <summary>
+            Prepare, parse, and evaluate mixed data through SobaScript supported syntax.
+            </summary>
+            <param name="data">Mixed input data.</param>
+            <returns>Evaluated end value.</returns>
+        </member>
+        <member name="T:net.r_eg.SobaScript.CValType">
+            <summary>
+            Possible values for components and other places of the core.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.CValType.Void">
+            <summary>
+            Specifies that the:
+            * Method doesn't return a value and/or takes no parameters
+            * Property: for setting (readonly) / for getting - i.e. only as setter
+            It's also used for binding the next Property/Method.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.CValType.Mixed">
+            <summary>
+            Value of different or untyped / uncertain types
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.CValType.Input">
+            <summary>
+            Any stream data input.
+            It's also used for binding the multiline data for:
+            * Property: #[Component property: multiline data]
+            * Method: #[Component method("arg"): multiline data]
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.CValType.Enum">
+            <summary>
+            Predefined data
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.CValType.UInteger">
+            <summary>
+            Unsigned types
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.CValType.List">
+            <summary>
+            Sequential list of mixed values.
+            format: 1,2,3,4,5,6,7
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.CValType.Object">
+            <summary>
+            Object data. Similar as array with mixed data.
+            Format: { "p1", true, { 12, 'n', -4.5f }, 12d }
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.CValType.Expression">
+            <summary>
+            Mixed expressions like Conditional Expression etc.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Exceptions.IncorrectNodeException.#ctor(net.r_eg.SobaScript.SNode.IPM,System.Int32)">
+            <summary>
+            Throw error with IPM
+            </summary>
+            <param name="pm"></param>
+            <param name="level">Selected level.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.IEvMSBuildMaker.MakeEvaluator(net.r_eg.Varhead.IUVars)">
+            <summary>
+            Makes default evaluator using defined user-variables container.
+            </summary>
+            <param name="uvars">Specified user-variables container.</param>
+            <returns></returns>
+        </member>
+        <member name="P:net.r_eg.SobaScript.ISobaCLoader.Components">
+            <summary>
+            Only enabled components from `Registered`.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.ISobaCLoader.Registered">
+            <summary>
+            All registered components.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.ISobaCLoader.EvMSBuild">
+            <summary>
+            Used instance of the E-MSBuild engine.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.ISobaCLoader.UVars">
+            <summary>
+            Varhead container for user-variables.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.ISobaCLoader.GetComponent``1">
+            <summary>
+            Get component for specified type.
+            </summary>
+            <typeparam name="T">The type of registered component.</typeparam>
+            <returns>Found instance or null value if this type is not registered.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.ISobaCLoader.GetComponent(System.Type)">
+            <summary>
+            Get component for specified type.
+            </summary>
+            <param name="type">The type of registered component.</param>
+            <returns>Found instance or null value if this type is not registered.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.ISobaCLoader.Register(net.r_eg.SobaScript.Components.IComponent)">
+            <summary>
+            To register new component.
+            </summary>
+            <param name="component"></param>
+            <returns>Success of operation.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.ISobaCLoader.Unregister(net.r_eg.SobaScript.Components.IComponent)">
+            <summary>
+            To unregister specific component.
+            </summary>
+            <param name="component"></param>
+            <returns>Success of operation.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.ISobaCLoader.Unregister">
+            <summary>
+            To unregister all available components.
+            </summary>
+        </member>
+        <member name="T:net.r_eg.SobaScript.ISobaScript">
+            <summary>
+            [ #SobaScript ]
+            
+            Extensible Modular Scripting Programming Language.
+            https://github.com/3F/SobaScript
+            
+            Please note: initially it was part of https://github.com/3F/vsSolutionBuildEvent
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.ISobaScript.Eval(System.String)">
+            <summary>
+            Prepare, parse, and evaluate mixed data through SobaScript supported syntax.
+            </summary>
+            <param name="data">Mixed input data.</param>
+            <returns>Evaluated end value.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.ISobaScript.Eval(System.String,System.Boolean)">
+            <summary>
+            Prepare, parse, and evaluate mixed data through SobaScript supported syntax.
+            </summary>
+            <param name="data">Mixed input data.</param>
+            <param name="allowEvM">Allows post-processing with E-MSBuild.
+            Some components may require immediate processing with evaluation before passing control to the next level.
+            </param>
+            <returns>Evaluated end value.</returns>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Pattern.DoubleQuotesContent">
+            <summary>
+            Content from double quotes according to SobaScript.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Pattern.SingleQuotesContent">
+            <summary>
+            Content from single quotes according to SobaScript.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Pattern.DoubleQuotesContentFull">
+            <summary>
+            Double quotes with content according to SobaScript.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Pattern.SingleQuotesContentFull">
+            <summary>
+            Single quotes with content according to SobaScript.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Pattern.SquareBracketsContent">
+            <summary>
+            Content from Square Brackets according to SobaScript.
+            [ ... ]
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Pattern.RoundBracketsContent">
+            <summary>
+            Content from Parentheses (Round Brackets) according to SobaScript.
+            ( ... )
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Pattern.CurlyBracketsContent">
+            <summary>
+            Content from Curly Brackets according to SobaScript.
+            { ... }
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Pattern.BooleanContent">
+            <summary>
+            Boolean value from allowed syntax
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Pattern.IntegerContent">
+            <summary>
+            Integer value from allowed syntax
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Pattern.UnsignedIntegerContent">
+            <summary>
+            Unsigned Integer value from allowed syntax
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Pattern.FloatContent">
+            <summary>
+            Signed floating-point number with single-precision from allowed syntax
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Pattern.UnsignedFloatContent">
+            <summary>
+            Unsigned floating-point number with single-precision from allowed syntax
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Pattern.DoubleContent">
+            <summary>
+            Signed floating-point number with double-precision from allowed syntax
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Pattern.UnsignedDoubleContent">
+            <summary>
+            Unsigned floating-point number with double-precision from allowed syntax
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Pattern.EnumOrConstContent">
+            <summary>
+            Mixed Enum or Const value from allowed syntax
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Pattern.ObjectContent">
+            <summary>
+            Object data. Similar as array with mixed data.
+            Format: { "p1", true, { 12, 'n', -4.5f }, 12d }
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Pattern.CharContent">
+            <summary>
+            Char symbol value from allowed syntax
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Pattern.Container">
+            <summary>
+            Container according to SobaScript.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Pattern.QuotesContent(System.Char,System.Boolean)">
+            <summary>
+            Content for present symbol of quotes
+            Escaping is a "\" for used symbol
+            e.g.: \', \"
+            </summary>
+            <param name="symbol">' or "</param>
+            <param name="withoutQuotes"></param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Pattern.BracketsContent(System.Char,System.Char)">
+            <summary>
+            Contents for the specified brackets character.
+            
+            Note: A balancing group definition deletes the definition of a previously defined group, 
+                  therefore allowed some intersection with name of the balancing group.. don't worry., be happy
+            </summary>
+            <param name="open">left symbol of bracket: [, {, ( etc.</param>
+            <param name="close">right symbol of bracket: ], }, ) etc.</param>
+        </member>
+        <member name="F:net.r_eg.SobaScript.SData.postEvM">
+            <summary>
+            Flag of post-processing with E-MSBuild engine.
+            
+            Some components may require immediate processing with evaluation before passing control to the next level.
+            This flag allows processing if needed.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.SData.content">
+            <summary>
+            Actual data for evaluators.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.SNode.Argument.data">
+            <summary>
+            Value of this argument.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.SNode.Argument.type">
+            <summary>
+            Type of this argument.
+            </summary>
+        </member>
+        <member name="T:net.r_eg.SobaScript.SNode.ArgumentType">
+            <summary>
+            Specifies possible types for arguments.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.SNode.ArgumentType.Mixed">
+            <summary>
+            Unspecified mixed data.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.SNode.ArgumentType.String">
+            <summary>
+            Common string.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.SNode.ArgumentType.StringSingle">
+            <summary>
+            String from single quotes.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.SNode.ArgumentType.StringDouble">
+            <summary>
+            String from double quotes.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.SNode.ArgumentType.Char">
+            <summary>
+            Single symbol from single quotes. 
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.SNode.ArgumentType.Boolean">
+            <summary>
+            Boolean data.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.SNode.ArgumentType.Integer">
+            <summary>
+            Signed Integer number.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.SNode.ArgumentType.Float">
+            <summary>
+            Signed floating-point number with single-precision.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.SNode.ArgumentType.Double">
+            <summary>
+            Signed floating-point number with double-precision.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.SNode.ArgumentType.EnumOrConst">
+            <summary>
+            Unspecified predefined data.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.SNode.ArgumentType.Enum">
+            <summary>
+            Predefined data as Enum.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.SNode.ArgumentType.Const">
+            <summary>
+            Predefined data as Const.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.SNode.ArgumentType.Object">
+            <summary>
+            Object data. Similar as array with mixed data.
+            Format: { "p1", true, { 12, 'n', -4.5f }, 12d }
+            </summary>
+        </member>
+        <member name="T:net.r_eg.SobaScript.SNode.EvalType">
+            <summary>
+            Evaluation states for E-MSBuild and other engines.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.SNode.EvalType.ArgStringD">
+            <summary>
+            String argument from double quotes.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.SNode.EvalType.ArgStringS">
+            <summary>
+            String argument from single quotes.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.SNode.EvalType.RightOperandStd">
+            <summary>
+            Standard right operand via '='
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.SNode.EvalType.RightOperandColon">
+            <summary>
+            Right operand via ':'
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.SNode.ILevel.Type">
+            <summary>
+            Type of level.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.SNode.ILevel.Data">
+            <summary>
+            Data of level.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.SNode.ILevel.Args">
+            <summary>
+            Arguments of level.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.SNode.ILevel.DataType">
+            <summary>
+            Type of data.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.ILevel.Is(net.r_eg.SobaScript.SNode.ArgumentType[])">
+            <summary>
+            Checks the argument types.
+            </summary>
+            <param name="types">The types that should be for this level.</param>
+            <returns>True value if the Args contains arguments with specified types.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.ILevel.Is(System.String,net.r_eg.SobaScript.SNode.ArgumentType[])">
+            <summary>
+            Checks the argument types.
+            </summary>
+            <param name="exception">Use string for exception instead of boolean result.</param>
+            <param name="types">The types that should be for this level.</param>
+            <returns>True value if the Args contains arguments with specified types.</returns>
+        </member>
+        <member name="P:net.r_eg.SobaScript.SNode.IPM.Levels">
+            <summary>
+            Access to found levels.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.SNode.IPM.FirstLevel">
+            <summary>
+            Access to first level.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.IPM.Is(System.Int32,net.r_eg.SobaScript.SNode.LevelType,System.String)">
+            <summary>
+            Checks equality for level.
+            </summary>
+            <param name="level">Selected level.</param>
+            <param name="type">Level should be with type.</param>
+            <param name="data">Level should be with data.</param>
+            <returns>true value if selected level is equal to selected type and data, otherwise false.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.IPM.FinalIs(System.Int32,net.r_eg.SobaScript.SNode.LevelType,System.String)">
+            <summary>
+            Checks equality for level with additional checking of finalization in levels chain.
+            </summary>
+            <param name="level">Selected level.</param>
+            <param name="type">Level should be with type.</param>
+            <param name="data">Level should be with data.</param>
+            <returns>true value if selected level is equal to selected type and data, otherwise false.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.IPM.FinalEmptyIs(System.Int32,net.r_eg.SobaScript.SNode.LevelType,System.String)">
+            <summary>
+            Checks equality for level with additional checking of finalization as RightOperandEmpty in levels chain.
+            </summary>
+            <param name="level">Selected level.</param>
+            <param name="type">Level should be with type.</param>
+            <param name="data">Level should be with data.</param>
+            <returns>true value if selected level is equal to selected type and data, otherwise false.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.IPM.PinTo(System.Int32)">
+            <summary>
+            Slicing of current levels to selected.
+            </summary>
+            <param name="level">New start position.</param>
+            <returns>Self reference.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.IPM.GetFrom(System.Int32)">
+            <summary>
+            Get all levels from selected.
+            </summary>
+            <param name="level">Start position.</param>
+            <returns>New instance of IPM.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.IPM.TraceLevel(System.Int32)">
+            <summary>
+            The string of diagnostic information about level.
+            </summary>
+            <param name="level"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.IPM.Fail(System.Int32,System.String)">
+            <summary>
+            Throws error for level.
+            </summary>
+            <param name="level"></param>
+            <param name="ident">Custom id of place where occurred.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.IPM.Is(net.r_eg.SobaScript.SNode.LevelType,System.String)">
+            <summary>
+            Checks equality for zero level.
+            </summary>
+            <param name="type">Level should be with type.</param>
+            <param name="data">Level should be with data.</param>
+            <returns>true value if selected level is equal to selected type and data, otherwise false.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.IPM.FinalIs(net.r_eg.SobaScript.SNode.LevelType,System.String)">
+            <summary>
+            Checks equality for zero level with additional checking of finalization in levels chain.
+            </summary>
+            <param name="type">Level should be with type.</param>
+            <param name="data">Level should be with data.</param>
+            <returns>true value if selected level is equal to selected type and data, otherwise false.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.IPM.FinalEmptyIs(net.r_eg.SobaScript.SNode.LevelType,System.String)">
+            <summary>
+            Checks equality for zero level with additional checking of finalization as RightOperandEmpty in levels chain.
+            </summary>
+            <param name="type">Level should be with type.</param>
+            <param name="data">Level should be with data.</param>
+            <returns>true value if selected level is equal to selected type and data, otherwise false.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.IPM.It(net.r_eg.SobaScript.SNode.LevelType,System.String)">
+            <summary>
+            Checks equality for zero level and move to next level if it is equal to this data.
+            </summary>
+            <param name="type">Level should be with type.</param>
+            <param name="data">Level should be with data.</param>
+            <returns>true value if selected level is equal to selected type and data, otherwise false.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.IPM.It(System.Int32,net.r_eg.SobaScript.SNode.LevelType,System.String)">
+            <summary>
+            Checks equality for specific level and move to next level if it is equal to this data.
+            </summary>
+            <param name="level">Selected level.</param>
+            <param name="type">Level should be with type.</param>
+            <param name="data">Level should be with data.</param>
+            <returns>true value if selected level is equal to selected type and data, otherwise false.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.IPM.IsMethodWithArgs(System.Int32,System.String,net.r_eg.SobaScript.SNode.ArgumentType[])">
+            <summary>
+            Checks equality of method for specific level.
+            </summary>
+            <param name="level">Selected level.</param>
+            <param name="name">Method name.</param>
+            <param name="types">The arguments that should be.</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.IPM.IsMethodWithArgs(System.String,net.r_eg.SobaScript.SNode.ArgumentType[])">
+            <summary>
+            Checks equality of method for zero level.
+            </summary>
+            <param name="name">Method name.</param>
+            <param name="types">The arguments that should be.</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.IPM.IsRight(net.r_eg.SobaScript.SNode.LevelType)">
+            <summary>
+            Checks type of right operand for zero level.
+            </summary>
+            <param name="type">The right operand should be with level type.</param>
+            <returns>true value if the right operand is equal to selected level type, otherwise false.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.IPM.IsData(System.String,System.String[])">
+            <summary>
+            Checks equality of data for zero level.
+            </summary>
+            <param name="data">Level should be with data.</param>
+            <param name="variants">Alternative variants that can be.</param>
+            <returns>true value if selected level is equal to selected data, otherwise false.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.IPM.GetArguments(System.String,System.Char)">
+            <summary>
+            Extracts all arguments from raw data.
+            </summary>
+            <param name="raw">Raw data of arguments.</param>
+            <param name="splitter">A character that delimits arguments.</param>
+            <returns>List of parsed arguments or null value if data is empty or null.</returns>
+        </member>
+        <member name="P:net.r_eg.SobaScript.SNode.Level.Type">
+            <summary>
+            Type of level.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.SNode.Level.Data">
+            <summary>
+            Data of level.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.SNode.Level.Args">
+            <summary>
+            Arguments of level if used.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.SNode.Level.DataType">
+            <summary>
+            Type of data.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.Level.Is(net.r_eg.SobaScript.SNode.ArgumentType[])">
+            <summary>
+            Checks the argument types.
+            </summary>
+            <param name="types">The types that should be for this level.</param>
+            <returns>True value if the Args contains arguments with specified types.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.Level.Is(System.String,net.r_eg.SobaScript.SNode.ArgumentType[])">
+            <summary>
+            Checks the argument types.
+            </summary>
+            <param name="exception">Use string for exception instead of boolean result.</param>
+            <param name="types">The types that should be for this level.</param>
+            <returns>True value if the Args contains arguments with specified types.</returns>
+        </member>
+        <member name="F:net.r_eg.SobaScript.SNode.LevelType.Property">
+            <summary>
+            Property type.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.SNode.LevelType.Method">
+            <summary>
+            Method or function.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.SNode.LevelType.RightOperandStd">
+            <summary>
+            Right operand through standard equal sign '='.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.SNode.LevelType.RightOperandColon">
+            <summary>
+            Right operand through colon ':'.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.SNode.LevelType.RightOperandEmpty">
+            <summary>
+            Unused right operand.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.SNode.PM.Levels">
+            <summary>
+            Access to found levels.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.SNode.PM.FirstLevel">
+            <summary>
+            Access to first level.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.SNode.PM.Rcon">
+            <summary>
+            Compiled rules of nodes.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.PM.Is(System.Int32,net.r_eg.SobaScript.SNode.LevelType,System.String)">
+            <summary>
+            Checks equality for level.
+            </summary>
+            <param name="level">Selected level.</param>
+            <param name="type">Level should be with type.</param>
+            <param name="data">Level should be with data.</param>
+            <returns>true value if selected level is equal to selected type and data, otherwise false.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.PM.FinalIs(System.Int32,net.r_eg.SobaScript.SNode.LevelType,System.String)">
+            <summary>
+            Checks equality for level with additional checking of finalization in levels chain.
+            </summary>
+            <param name="level">Selected level.</param>
+            <param name="type">Level should be with type.</param>
+            <param name="data">Level should be with data.</param>
+            <returns>true value if selected level is equal to selected type and data, otherwise false.</returns>
+            <exception cref="T:net.r_eg.SobaScript.Exceptions.NotSupportedOperationException">If found level is equal to selected type and data but is not latest in levels chain.</exception>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.PM.FinalEmptyIs(System.Int32,net.r_eg.SobaScript.SNode.LevelType,System.String)">
+            <summary>
+            Checks equality for level with additional checking of finalization as RightOperandEmpty in levels chain.
+            </summary>
+            <param name="level">Selected level.</param>
+            <param name="type">Level should be with type.</param>
+            <param name="data">Level should be with data.</param>
+            <returns>true value if selected level is equal to selected type and data, otherwise false.</returns>
+            <exception cref="T:net.r_eg.SobaScript.Exceptions.NotSupportedOperationException">If found level is equal to selected type and data but is not latest or is not RightOperandEmpty in levels chain.</exception>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.PM.PinTo(System.Int32)">
+            <summary>
+            Slicing of current levels to selected.
+            </summary>
+            <param name="level">New start position.</param>
+            <returns>Self reference.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.PM.GetFrom(System.Int32)">
+            <summary>
+            Get all levels from selected.
+            </summary>
+            <param name="level">Start position.</param>
+            <returns>New instance of IPM.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.PM.TraceLevel(System.Int32)">
+            <summary>
+            The string of diagnostic information about level.
+            </summary>
+            <param name="level"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.PM.Fail(System.Int32,System.String)">
+            <summary>
+            Throws error for level.
+            </summary>
+            <param name="level"></param>
+            <param name="ident">Custom id of place where occurred.</param>
+            <exception cref="T:net.r_eg.SobaScript.Exceptions.IncorrectNodeException"></exception>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.PM.Is(net.r_eg.SobaScript.SNode.LevelType,System.String)">
+            <summary>
+            Checks equality for zero level.
+            </summary>
+            <param name="type">Level should be with type.</param>
+            <param name="data">Level should be with data.</param>
+            <returns>true value if selected level is equal to selected type and data, otherwise false.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.PM.FinalIs(net.r_eg.SobaScript.SNode.LevelType,System.String)">
+            <summary>
+            Checks equality for zero level with additional checking of finalization in levels chain.
+            </summary>
+            <param name="type">Level should be with type.</param>
+            <param name="data">Level should be with data.</param>
+            <returns>true value if selected level is equal to selected type and data, otherwise false.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.PM.FinalEmptyIs(net.r_eg.SobaScript.SNode.LevelType,System.String)">
+            <summary>
+            Checks equality for zero level with additional checking of finalization as RightOperandEmpty in levels chain.
+            </summary>
+            <param name="type">Level should be with type.</param>
+            <param name="data">Level should be with data.</param>
+            <returns>true value if selected level is equal to selected type and data, otherwise false.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.PM.It(System.Int32,net.r_eg.SobaScript.SNode.LevelType,System.String)">
+            <summary>
+            Checks equality for specific level and move to next level if it is equal to this data.
+            </summary>
+            <param name="level">Selected level.</param>
+            <param name="type">Level should be with type.</param>
+            <param name="data">Level should be with data.</param>
+            <returns>true value if selected level is equal to selected type and data, otherwise false.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.PM.It(net.r_eg.SobaScript.SNode.LevelType,System.String)">
+            <summary>
+            Checks equality for zero level and move to next level if it is equal to this data.
+            </summary>
+            <param name="type">Level should be with type.</param>
+            <param name="data">Level should be with data.</param>
+            <returns>true value if selected level is equal to selected type and data, otherwise false.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.PM.IsMethodWithArgs(System.Int32,System.String,net.r_eg.SobaScript.SNode.ArgumentType[])">
+            <summary>
+            Checks equality of method for specific level.
+            </summary>
+            <param name="level">Selected level.</param>
+            <param name="name">Method name.</param>
+            <param name="types">The arguments that should be.</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.PM.IsMethodWithArgs(System.String,net.r_eg.SobaScript.SNode.ArgumentType[])">
+            <summary>
+            Checks equality of method for zero level.
+            </summary>
+            <param name="name">Method name.</param>
+            <param name="types">The arguments that should be.</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.PM.IsRight(net.r_eg.SobaScript.SNode.LevelType)">
+            <summary>
+            Checks type of right operand for zero level.
+            </summary>
+            <param name="type">The right operand should be with level type.</param>
+            <returns>true value if the right operand is equal to selected level type, otherwise false.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.PM.IsData(System.String,System.String[])">
+            <summary>
+            Checks equality of data for zero level.
+            </summary>
+            <param name="data">Level should be with data.</param>
+            <param name="variants">Alternative variants that can be.</param>
+            <returns>true value if selected level is equal to selected data, otherwise false.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.PM.GetArguments(System.String,System.Char)">
+            <summary>
+            Extracts all arguments from raw data.
+            </summary>
+            <param name="raw">Raw data of arguments.</param>
+            <param name="splitter">A character that delimits arguments.</param>
+            <returns>List of parsed arguments or null value if data is empty or null.</returns>
+            <exception cref="T:net.r_eg.SobaScript.Exceptions.IncorrectSyntaxException">If incorrect data.</exception>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.PM.#ctor(System.String,net.r_eg.EvMSBuild.IEvMSBuild,net.r_eg.SobaScript.SNode.EvalType)">
+            <param name="raw">Initial raw data.</param>
+            <param name="msbuild">To evaluate data with MSBuild engine where it's allowed.</param>
+            <param name="type">Allowed types of evaluation with MSBuild.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.PM.#ctor(System.Collections.Generic.IList{net.r_eg.SobaScript.SNode.ILevel})">
+            <param name="levels">predefined levels.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.PM.#ctor(net.r_eg.EvMSBuild.IEvMSBuild,net.r_eg.SobaScript.SNode.EvalType)">
+            <param name="emsbuild">To evaluate data with MSBuild engine where it's allowed.</param>
+            <param name="type">Allowed types of evaluation with MSBuild.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.PM.Detect(System.String)">
+            <summary>
+            Entry point of analyser.
+            </summary>
+            <param name="data">mixed data</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.PM.ExtractArgs(System.String,System.Char)">
+            <summary>
+            Extracts all arguments from line.
+            </summary>
+            <param name="data">Raw line with user arguments.</param>
+            <param name="splitter">A character that delimits arguments.</param>
+            <returns>List of parsed arguments or null value if data is empty.</returns>
+            <exception cref="T:net.r_eg.SobaScript.Exceptions.IncorrectSyntaxException">If incorrect arguments line.</exception>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.PM.DetectArgument(System.String)">
+            <summary>
+            Parse of argument from raw line.
+            </summary>
+            <param name="raw"></param>
+            <returns>Prepared struct.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.PM.GetRightOperand(System.String,net.r_eg.SobaScript.StringHandler)">
+            <summary>
+            Gets right operand as a Level object.
+            </summary>
+            <param name="data">raw data</param>
+            <param name="handler">Handler of string if used.</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.PM.IsLastLevel(net.r_eg.SobaScript.SNode.ILevel)">
+            <summary>
+            Checks last level.
+            </summary>
+            <param name="level">Level for checking.</param>
+            <returns>true value if selected is latest.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.SNode.PM.SliceLevels(System.Int32)">
+            <param name="level">Start position of slicing.</param>
+            <returns></returns>
+        </member>
+        <member name="P:net.r_eg.SobaScript.SNode.RArgs.Length">
+            <summary>
+            Alias to Count.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.SNode.RLevels.Length">
+            <summary>
+            Alias to Count.
+            </summary>
+        </member>
+        <member name="T:net.r_eg.SobaScript.Soba">
+            <summary>
+            [ #SobaScript ]
+            
+            Extensible Modular Scripting Programming Language.
+            https://github.com/3F/SobaScript
+            
+            Please note: initially it was part of https://github.com/3F/vsSolutionBuildEvent
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Soba.depthLimit">
+            <summary>
+            Maximum of nesting level
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Soba._depthLevel">
+            <summary>
+            Current level of nesting data.
+            Aborting if reached limit
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Soba.Components">
+            <summary>
+            Only enabled components from `Registered`.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Soba.Registered">
+            <summary>
+            All registered components.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Soba.EvMSBuild">
+            <summary>
+            Used instance of the E-MSBuild engine.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Soba.UVars">
+            <summary>
+            Varhead container for user-variables.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Soba.Eval(System.String)">
+            <summary>
+            Prepare, parse, and evaluate mixed data through SobaScript supported syntax.
+            </summary>
+            <param name="data">Mixed input data.</param>
+            <returns>Evaluated end value.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Soba.Eval(System.String,System.Boolean)">
+            <param name="data">Mixed data for evaluation.</param>
+            <param name="allowEvM">Allows post-processing with E-MSBuild.
+            Some components may require immediate processing with evaluation before passing control to the next level.
+            </param>
+            <returns>Prepared and evaluated data through SobaScript.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Soba.Evaluate(System.String)">
+            <summary>
+            Evaluates mixed data through some engine like E-MSBuild, SobaScript, etc.
+            </summary>
+            <param name="data">Mixed input data.</param>
+            <returns>Evaluated end value.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Soba.GetComponent``1">
+            <summary>
+            Get component for specified type.
+            </summary>
+            <typeparam name="T">The type of registered component.</typeparam>
+            <returns>Found instance or null value if this type is not registered.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Soba.GetComponent(System.Type)">
+            <summary>
+            Get component for specified type.
+            </summary>
+            <param name="type">The type of registered component.</param>
+            <returns>Found instance or null value if this type is not registered.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Soba.Register(net.r_eg.SobaScript.Components.IComponent)">
+            <summary>
+            To register new component.
+            </summary>
+            <param name="component"></param>
+            <returns>Success of</returns>
+            <exception cref="T:net.r_eg.SobaScript.Exceptions.ComponentException"></exception>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Soba.Unregister(net.r_eg.SobaScript.Components.IComponent)">
+            <summary>
+            To unregister specific component.
+            </summary>
+            <param name="component"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Soba.Unregister">
+            <summary>
+            Unregister all available components.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Soba.parse(net.r_eg.SobaScript.SData,System.Int32,net.r_eg.SobaScript.StringHandler)">
+            <param name="data">Mixed data</param>
+            <param name="level">Nesting level</param>
+            <param name="hString">Handler of strings if exists</param>
+            <returns>Prepared and evaluated data</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Soba.parse(net.r_eg.SobaScript.SData,net.r_eg.SobaScript.Components.IComponent)">
+            <summary>
+            Parse data for specific component
+            </summary>
+            <param name="data">Mixed data</param>
+            <param name="c">Component</param>
+            <returns>Prepared + evaluated data by component</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Soba.EscapeMSBuildData(System.String,System.Boolean)">
+            <param name="data"></param>
+            <param name="force">only $(..) -> $$(..) if false / and $$(..) -> $$$(..), etc. if true</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Soba.IsReadyToParse(System.String,net.r_eg.SobaScript.Components.IComponent)">
+            <summary>
+            Checking ability to parse the data for specific component
+            </summary>
+            <param name="data">Mixed data</param>
+            <param name="c">Component</param>
+            <returns>ready to parse or not</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Soba.selector(net.r_eg.SobaScript.SData)">
+            <param name="data">mixed data</param>
+            <returns>prepared and evaluated data</returns>
+        </member>
+        <member name="P:net.r_eg.SobaScript.StringHandler.DoubleQuotesContentFull">
+            <summary>
+            Specific format of double quotes with content
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.StringHandler.SingleQuotesContentFull">
+            <summary>
+            Specific format of single quotes with content
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.StringHandler.ProtectCores(System.String)">
+            <summary>
+            Protects the MSBuild/SBE-Scripts containers.
+            </summary>
+            <param name="data"></param>
+            <returns>protected string</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.StringHandler.Normalize(System.String)">
+            <summary>
+            Normalize data for strings.
+            eg. to unescape double quotes etc.
+            TODO: obsolete
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.StringHandler.EscapeQuotes(System.String)">
+            <summary>
+            Escaping quotes in data
+            </summary>
+            <param name="data">mixed string</param>
+            <returns>data with escaped quotes</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.StringHandler.ProtectArray(System.String)">
+            <summary>
+            Protects ArrayContent data.
+            </summary>
+            <param name="data"></param>
+            <returns>protected string</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.StringHandler.ProtectArguments(System.String)">
+            <summary>
+            Protects argument list.
+            </summary>
+            <param name="data"></param>
+            <returns>protected string</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.StringHandler.ProtectDataSection(System.String)">
+            <summary>
+            Protects data inside &lt;#data&gt; ... &lt;/#data&gt;
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.StringHandler.Protect(System.String)">
+            <summary>
+            Protection methods by default.
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.StringHandler.UnescapeQuotes(System.Char,System.String)">
+            <summary>
+            Unescape quote symbols from string.
+            TODO
+            </summary>
+            <param name="type">Quote symbol.</param>
+            <param name="data"></param>
+            <returns>String with unescaped quote symbols.</returns>
+        </member>
+        <member name="T:net.r_eg.SobaScript.Value">
+            <summary>
+            TODO: standardization
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Value.ARRAY_SEPARATOR">
+            <summary>
+            Separator for array data.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Value.Empty">
+            <summary>
+            Empty value by default.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Value.ToBoolean(System.String)">
+            <summary>
+            A boolean value from string data.
+            </summary>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Value.ToInt32(System.String)">
+            <summary>
+            Int32 value from string data.
+            </summary>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Value.ToUInt32(System.String)">
+            <summary>
+            Unsigned Int32 value from string data.
+            </summary>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Value.ToFloat(System.String)">
+            <summary>
+            Floating-point number with single-precision from string data.
+            </summary>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Value.ToDouble(System.String)">
+            <summary>
+            Floating-point number with double-precision from string data.
+            </summary>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Value.ToChar(System.String)">
+            <summary>
+            A symbol as char from string data.
+            </summary>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Value.From(System.Boolean)">
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Value.From(System.Collections.Generic.List{System.String})">
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Value.From(System.Int32)">
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Value.From(System.Enum)">
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Value.From(System.Object)">
+            <param name="val">Including array of data.</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Value.From(System.String)">
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Value.Extract(net.r_eg.SobaScript.SNode.RArgs)">
+            <summary>
+            Extract SNode.RArguments into system object[] data.
+            </summary>
+            <param name="args">SNode arguments.</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Value.Pack(System.Object)">
+            <summary>
+            To pack complex object data in string format.
+            Ex.: {"str", 123, -1.4, true, "str2", {1.2, "str2", false}, -24.574}
+            </summary>
+            <param name="data">Mixed data inc. complex object.</param>
+            <returns>string with mixed data.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Value.PackArgument(System.Object)">
+            <summary>
+            To pack string argument in object.
+            </summary>
+            <param name="arg">Argument for packing.</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Value.Cmp(System.String,System.String,System.String)">
+            <summary>
+            Comparing values.
+            </summary>
+            <param name="left">Left operand</param>
+            <param name="right">Right operand</param>
+            <param name="coperator">Operator of comparison</param>
+            <returns>Result of comparison</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Value.Equal(System.String,System.String)">
+            <summary>
+            Comparing values by chain: Int32 -> Boolean -> String
+            </summary>
+            <param name="left">left operand</param>
+            <param name="right">right operand</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

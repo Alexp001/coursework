@@ -1,0 +1,29 @@
+﻿@model PL.Models.CommentViewModel
+@{
+    ViewBag.Title = "Leave a comment";
+}
+<h2>@ViewBag.Title</h2>
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.LabelFor(model => model.KindOfComment, "Choose kind a comment")
+    <br />
+    @Html.DropDownListFor(m => m.KindOfComment, new SelectList(new string[] { "Staff", "Pizzas", "Website" }), new { @class = "custom-select" })
+    <br />
+    <br />
+    @Html.LabelFor(model => model.Mark, "Mark")
+    @Html.TextBoxFor(model => model.Mark, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.Mark, "", new { @class = "text-danger" })
+    <br />
+    <br />
+    @Html.LabelFor(model => model.Text, "Text")
+    <br />
+    @Html.TextAreaFor(model => model.Text, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.Text, "", new { @class = "text-danger" })
+    <br />
+    <br />
+    @Html.ActionLink("Go back", "Index", "Comment", null, new { @class = "btn btn-dark btn-lg" })
+    <input type="submit" value="Leave a comment" class="btn btn-warning btn-lg" />
+}
+

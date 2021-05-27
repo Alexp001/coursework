@@ -1,0 +1,46 @@
+﻿@model PL.Models.ClientViewModel
+@{
+    ViewBag.Title = "Update";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr/>
+@using (Html.BeginForm("Update", "Client", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+<fieldset>
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.UserId)
+
+
+    <p>
+        @Html.LabelFor(m => m.Name, "Name")
+        <br />
+        @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Address, "Address")
+        <br />
+        @Html.EditorFor(m => m.Address, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Phone, "Phone")
+        <br />
+        @Html.EditorFor(m => m.Phone, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Email, "Email")
+        <br />
+        @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+    </p>
+    @Html.ActionLink("Go back", "Index", "Client", null, new { @class = "btn btn-dark btn-lg" })
+    <input type="submit" value="Update" class="btn btn-warning btn-lg" />
+</fieldset>
+}
+

@@ -1,0 +1,38 @@
+﻿@model ICollection<PL.Models.ClientUserViewModel>
+@{
+    ViewBag.Title = "Clients";
+}
+<h2> @ViewBag.Title</h2>
+<table class="table table-striped">
+    <thead class="bg-dark text-white">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th></th>
+        </tr>
+    </thead>
+    @if (Model != null && Model.Count() != 0)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <th>@item.ClientObject.Name</th>
+                <th>@item.ClientObject.Email</th>
+                <th>@item.ClientObject.Phone</th>
+                <th>@item.ClientObject.Address</th>
+                <th>
+                    @Html.ActionLink("Update", "Update", "Client", new { id = item.ClientObject.Id, }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Delete", "Delete", "Client", new { id = item.ClientObject.Id, }, new { @class = "btn btn-danger" })
+                </th>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="4" class="text-center">No client</td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,683 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SobaScript.Mapper</name>
+    </assembly>
+    <members>
+        <member name="P:net.r_eg.SobaScript.Mapper.ComponentAttribute.Name">
+            <summary>
+            Component name.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.ComponentAttribute.Description">
+            <summary>
+            About component.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.ComponentAttribute.Parent">
+            <summary>
+            Name of parent specification if exists or null.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.ComponentAttribute.Aliases">
+            <summary>
+            Aliases to the primary name if used.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.ComponentAttribute.#ctor(System.String,System.String,System.String)">
+            <param name="name">Component name.</param>
+            <param name="description">About component.</param>
+            <param name="parent">Name of parent specification if exists or null.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.ComponentAttribute.#ctor(System.String,System.String)">
+            <param name="name">Component name.</param>
+            <param name="description">About component.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.ComponentAttribute.#ctor(System.String,System.String[],System.String,System.String)">
+            <param name="name">Component name.</param>
+            <param name="aliases">Aliases to the primary name if used.</param>
+            <param name="description">About component.</param>
+            <param name="parent">Name of parent specification if exists or null.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.ComponentAttribute.#ctor(System.String,System.String[],System.String)">
+            <param name="name">Component name.</param>
+            <param name="aliases">Aliases to the primary name if used.</param>
+            <param name="description">About component.</param>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.DefinitionAttribute.Name">
+            <summary>
+            Definition name.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.DefinitionAttribute.Description">
+            <summary>
+            About the definition.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.DefinitionAttribute.Parent">
+            <summary>
+            Name of parent specification if exists or null.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.DefinitionAttribute.#ctor(System.String,System.String)">
+            <param name="name">Definition name.</param>
+            <param name="description">About of the definition</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.DefinitionAttribute.#ctor(System.String,System.String,System.String)">
+            <param name="name">Definition name.</param>
+            <param name="description">About the definition.</param>
+            <param name="parent">Name of parent specification if exists or null.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.Extensions.MathExtension.HashPolynom(System.Int32,System.Int32)">
+            <summary>
+            Our optimal polynom for hash functions.
+            </summary>
+            <param name="r">initial vector</param>
+            <param name="x">new value</param>
+            <returns></returns>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.IAttrDomLevelA.Name">
+            <summary>
+            Element name.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.IAttrDomLevelA.Description">
+            <summary>
+            About this element.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.IAttrDomLevelA.Parent">
+            <summary>
+            Name of parent specification.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.IAttrDomLevelB.Parent">
+            <summary>
+            Name of the parent specification.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.IAttrDomLevelB.Method">
+            <summary>
+            Actual/real method name of the parent specification.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.IInspector.Root">
+            <summary>
+            List of constructed root-data.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.IInspector.GetBy(net.r_eg.SobaScript.Mapper.NodeIdent)">
+            <summary>
+            List of constructed data by identification of node.
+            </summary>
+            <param name="ident">Identifier of node.</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.IInspector.GetBy(System.Type)">
+            <summary>
+            List of constructed data by type of component.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.IInspector.GetBy(net.r_eg.SobaScript.Components.IComponent)">
+            <summary>
+            List of constructed data by IComponent.
+            </summary>
+            <param name="component"></param>
+            <returns></returns>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.INodeInfo.Name">
+            <summary>
+            Element name.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.INodeInfo.Description">
+            <summary>
+            Description for current element.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.INodeInfo.Signature">
+            <summary>
+            Technical description of the method/property.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.INodeInfo.Overname">
+            <summary>
+            Displays element over the 'Name' property.
+            Useful for code completion.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.INodeInfo.Aliases">
+            <summary>
+            Aliases to primary name if used.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.INodeInfo.Type">
+            <summary>
+            Element type.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.INodeInfo.Link">
+            <summary>
+            Binding with other node.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Mapper.Inspector.cLoader">
+            <summary>
+            Used loader
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Mapper.Inspector.data">
+            <summary>
+            Main storage.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.Inspector.Root">
+            <summary>
+            List of constructed root-data.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.Inspector.GetBy(net.r_eg.SobaScript.Mapper.NodeIdent)">
+            <summary>
+            List of constructed data by identification of node.
+            </summary>
+            <param name="ident">Identifier of node.</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.Inspector.GetBy(System.Type)">
+            <summary>
+            List of constructed data by type of component.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.Inspector.GetBy(net.r_eg.SobaScript.Components.IComponent)">
+            <summary>
+            List of constructed data by IComponent
+            </summary>
+            <param name="component"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.Inspector.#ctor(net.r_eg.SobaScript.ISobaCLoader)">
+            <summary>
+            Construct data from used components with ISobaCLoader.
+            </summary>
+            <param name="cLoader"></param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.Inspector.Extract(net.r_eg.SobaScript.Components.IComponent,System.Collections.Concurrent.ConcurrentDictionary{net.r_eg.SobaScript.Mapper.NodeIdent,System.Collections.Generic.List{net.r_eg.SobaScript.Mapper.INodeInfo}})">
+            <param name="c">From</param>
+            <param name="data">To</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.Inspector.InspectLevelB(System.Type,System.Attribute,System.Reflection.MethodInfo,System.Collections.Concurrent.ConcurrentDictionary{net.r_eg.SobaScript.Mapper.NodeIdent,System.Collections.Generic.List{net.r_eg.SobaScript.Mapper.INodeInfo}})">
+            <param name="type">Type of element.</param>
+            <param name="attr">Found attribute.</param>
+            <param name="method">Found method.</param>
+            <param name="data"></param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.Inspector.InspectLevelA(System.Type,System.Attribute,System.Collections.Concurrent.ConcurrentDictionary{net.r_eg.SobaScript.Mapper.NodeIdent,System.Collections.Generic.List{net.r_eg.SobaScript.Mapper.INodeInfo}})">
+            <param name="type">Type of element.</param>
+            <param name="attr">Found attribute.</param>
+            <param name="data"></param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.Inspector.AliasesToNodeLevelA(net.r_eg.SobaScript.Mapper.INodeInfo,System.Collections.Generic.List{net.r_eg.SobaScript.Mapper.INodeInfo})">
+            <summary>
+            Work with aliases to components and to definitions.
+            </summary>
+            <param name="node">Node with aliases</param>
+            <param name="data">All nodes</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.Inspector.IsEnabled(System.String)">
+            <summary>
+            Checking the enabled status for element.
+            </summary>
+            <param name="elementName">Element name from storage.</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.Inspector.GetComponentName(System.Type)">
+            <param name="type"></param>
+            <returns>Original name by its class name or from ComponentAttribute</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.Inspector.GetCustomAttribute(System.Type,System.Type,System.Boolean)">
+            <summary>
+            Get the first custom attribute.
+            note: CustomAttribute is allowed only with v4.5 from CustomAttributeExtensions
+            </summary>
+            <param name="type"></param>
+            <param name="attributeType"></param>
+            <param name="inherit"></param>
+            <returns></returns>
+        </member>
+        <member name="T:net.r_eg.SobaScript.Mapper.ISbMapper">
+            <summary>
+            Mapper for SobaScript components and their nodes.
+            https://github.com/3F/SobaScript.Mapper
+            
+            Please note: initially it was part of https://github.com/3F/vsSolutionBuildEvent
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.ISbMapper.Inspector">
+            <summary>
+            Mapper of available components.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.ISbMapper.EvMSBuild">
+            <summary>
+            Used instance of E-MSBuild engine.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.ISbMapper.ListComponents(System.String)">
+            <param name="name">Component name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.ISbMapper.Find(System.String,System.Int32,net.r_eg.SobaScript.Mapper.KDataCommand)">
+            <param name="data">Where to look.</param>
+            <param name="offset">Position in data to start searching.</param>
+            <param name="cmd">Specified command for this search.</param>
+            <returns>Found items.</returns>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Mapper.KDataCommand.Container">
+            <summary>
+            Start of container '#['..
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Mapper.KDataCommand.CtrlSpace">
+            <summary>
+            Keys combination - [ctrl] + [space]
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Mapper.KDataCommand.LevelByDot">
+            <summary>
+            Level of property/method etc. with '.'
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Mapper.KDataCommand.Space">
+            <summary>
+            Space key
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Mapper.KDataCommand.MSBuildContainer">
+            <summary>
+            Start of container '$('..
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.MethodAttribute.Name">
+            <summary>
+            Method name.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.MethodAttribute.Description">
+            <summary>
+            Description for current method.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.MethodAttribute.Return">
+            <summary>
+            The return value for current method.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.MethodAttribute.Arguments">
+            <summary>
+            Arguments of method.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.MethodAttribute.Parent">
+            <summary>
+            Name of the parent specification (property/method/etc.) if exists or null.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.MethodAttribute.Method">
+            <summary>
+            Actual/real method name of the parent specification if exists or null.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.MethodAttribute.#ctor(System.String,System.String,net.r_eg.SobaScript.CValType,net.r_eg.SobaScript.CValType[])">
+            <param name="name">Method name.</param>
+            <param name="description">Description for current method.</param>
+            <param name="ret">Return value.</param>
+            <param name="args">Arguments of method.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.MethodAttribute.#ctor(System.String,net.r_eg.SobaScript.CValType,net.r_eg.SobaScript.CValType[])">
+            <param name="name">Method name.</param>
+            <param name="ret">Return value.</param>
+            <param name="args">Arguments of method.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.MethodAttribute.#ctor(System.String,System.String,System.String,System.String,net.r_eg.SobaScript.CValType,net.r_eg.SobaScript.CValType[])">
+            <param name="name">Method name.</param>
+            <param name="description">Description for current method.</param>
+            <param name="parent">Name of the parent specification (property/method/etc.) if exists or null.</param>
+            <param name="method">Actual/real method name of the parent specification if exists or null.</param>
+            <param name="ret">Return value.</param>
+            <param name="args">Arguments of method.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.MethodAttribute.#ctor(System.String,System.String,System.String,net.r_eg.SobaScript.CValType,net.r_eg.SobaScript.CValType[])">
+            <param name="name">Method name.</param>
+            <param name="parent">Name of the parent specification (property/method/etc.) if exists or null.</param>
+            <param name="method">Actual/real method name of the parent specification if exists or null.</param>
+            <param name="ret">Return value.</param>
+            <param name="args">Arguments of method.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.MethodAttribute.#ctor(System.String,System.String,System.String[],System.String[],net.r_eg.SobaScript.CValType,net.r_eg.SobaScript.CValType[])">
+            <param name="name">Method name.</param>
+            <param name="description">Description for current method.</param>
+            <param name="argsName">Arguments of method by name.</param>
+            <param name="argsDesc">Description for arguments.</param>
+            <param name="ret">Return value.</param>
+            <param name="args">Arguments of method.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.MethodAttribute.#ctor(System.String,System.String[],System.String[],net.r_eg.SobaScript.CValType,net.r_eg.SobaScript.CValType[])">
+            <param name="name">Method name.</param>
+            <param name="argsName">Arguments of method by name.</param>
+            <param name="argsDesc">Description for arguments.</param>
+            <param name="ret">Return value.</param>
+            <param name="args">Arguments of method.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.MethodAttribute.#ctor(System.String,System.String,System.String,System.String,System.String[],System.String[],net.r_eg.SobaScript.CValType,net.r_eg.SobaScript.CValType[])">
+            <param name="name">Method name.</param>
+            <param name="description">Description for current method.</param>
+            <param name="parent">Name of the parent specification (property/method/etc.) if exists or null.</param>
+            <param name="method">Actual/real method name of the parent specification if exists or null.</param>
+            <param name="argsName">Arguments of method by name.</param>
+            <param name="argsDesc">Description for arguments.</param>
+            <param name="ret">Return value.</param>
+            <param name="args">Arguments of method.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.MethodAttribute.#ctor(System.String,System.String,System.String,System.String[],System.String[],net.r_eg.SobaScript.CValType,net.r_eg.SobaScript.CValType[])">
+            <param name="name">Method name.</param>
+            <param name="parent">Name of the parent specification (property/method/etc.) if exists or null.</param>
+            <param name="method">Actual/real method name of the parent specification if exists or null.</param>
+            <param name="argsName">Arguments of method by name.</param>
+            <param name="argsDesc">Description for arguments.</param>
+            <param name="ret">Return value.</param>
+            <param name="args">Arguments of method.</param>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Mapper.NodeIdent.parent">
+            <summary>
+            Name of the parent specification (property/method/etc.)
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Mapper.NodeIdent.method">
+            <summary>
+            Actual/real method name of the parent specification.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Mapper.NodeIdent.className">
+            <summary>
+            Actual class name if information is provided.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.NodeIdent.#ctor(System.String,System.String,System.String)">
+            <param name="parent">Name of the parent specification (property/method/etc.).</param>
+            <param name="method">Actual/real method name of the parent specification.</param>
+            <param name="className">Actual class name.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.NodeIdent.#ctor(System.String,System.String)">
+            <param name="parent">Name of the parent specification (property/method/etc.).</param>
+            <param name="method">Actual/real method name of the parent specification.</param>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.NodeInfo.Name">
+            <summary>
+            Element name.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.NodeInfo.Description">
+            <summary>
+            Description for current element.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.NodeInfo.Signature">
+            <summary>
+            Technical description of the method/property.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.NodeInfo.Overname">
+            <summary>
+            Displays element over the 'Name' property.
+            Useful for code completion.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.NodeInfo.Aliases">
+            <summary>
+            Aliases to primary name if used.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.NodeInfo.Type">
+            <summary>
+            Element type.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.NodeInfo.Link">
+            <summary>
+            Binding with other node.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.NodeInfo.#ctor(System.String,System.String,net.r_eg.SobaScript.Mapper.NodeType,System.String)">
+            <param name="name">Element name.</param>
+            <param name="description">Description for current element.</param>
+            <param name="type">Element type.</param>
+            <param name="overname">Displays element over the 'Name' property.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.NodeInfo.#ctor(System.String,System.String,net.r_eg.SobaScript.Mapper.NodeIdent,net.r_eg.SobaScript.Mapper.NodeType,System.String)">
+            <param name="name">Element name.</param>
+            <param name="description">Description for current element.</param>
+            <param name="ident">Binding with other node.</param>
+            <param name="type">Element type.</param>
+            <param name="overname">Displays element over the 'Name' property.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.NodeInfo.#ctor(net.r_eg.SobaScript.Mapper.PropertyAttribute,System.String,System.String)">
+            <param name="attr">Attribute of property.</param>
+            <param name="method">Current actual/real method name.</param>
+            <param name="className">Actual class name.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.NodeInfo.#ctor(net.r_eg.SobaScript.Mapper.DefinitionAttribute,System.String)">
+            <param name="attr">Attribute of property.</param>
+            <param name="overname">Displays element over the 'Name' property.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.NodeInfo.#ctor(net.r_eg.SobaScript.Mapper.ComponentAttribute,System.String)">
+            <param name="attr">Attribute of property.</param>
+            <param name="overname">Displays element over the 'Name' property.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.NodeInfo.#ctor(net.r_eg.SobaScript.Mapper.MethodAttribute,System.String,System.String)">
+            <param name="attr">Attribute of method.</param>
+            <param name="method">Current actual/real method name.</param>
+            <param name="className">Actual class name.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.NodeInfo.AboutProperty(net.r_eg.SobaScript.CValType,net.r_eg.SobaScript.CValType)">
+            <summary>
+            Builds the technical description of the property.
+            </summary>
+            <param name="get">Value type for getting.</param>
+            <param name="set">Value type for setting.</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.NodeInfo.DisplayProperty(net.r_eg.SobaScript.CValType,net.r_eg.SobaScript.CValType)">
+            <summary>
+            Formatting of the property.
+            </summary>
+            <param name="get">Value type for getting.</param>
+            <param name="set">Value type for setting.</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.NodeInfo.AboutMethod(net.r_eg.SobaScript.CValType,net.r_eg.SobaScript.Mapper.TArgument[])">
+            <summary>
+            Builds the technical description of the method.
+            </summary>
+            <param name="ret">Return value.</param>
+            <param name="args">Arguments of method.</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.NodeInfo.DisplayMethod(net.r_eg.SobaScript.CValType,net.r_eg.SobaScript.Mapper.TArgument[])">
+            <summary>
+            Formatting of the method.
+            </summary>
+            <param name="ret">Return value.</param>
+            <param name="args">Arguments of method.</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.NodeInfo._t(net.r_eg.SobaScript.CValType)">
+            <summary>
+            Formatting of the type.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="T:net.r_eg.SobaScript.Mapper.NodeType">
+            <summary>
+            Type of used element in node.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Mapper.NodeType.Unspecified">
+            <summary>
+            Basic valid node type.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Mapper.NodeType.Component">
+            <summary>
+            Defaults for DefinitionAttribute.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Mapper.NodeType.Definition">
+            <summary>
+            Unspecified complex expression/construction.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Mapper.NodeType.Method">
+            <summary>
+            Defaults for MethodAttribute.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Mapper.NodeType.Property">
+            <summary>
+            Defaults for PropertyAttribute.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Mapper.NodeType.AliasToComponent">
+            <summary>
+            Alias to existing Component.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Mapper.NodeType.AliasToDefinition">
+            <summary>
+            Alias to existing Definition.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.PropertyAttribute.Name">
+            <summary>
+            Property name.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.PropertyAttribute.Description">
+            <summary>
+            Description for current property.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.PropertyAttribute.Get">
+            <summary>
+            Value type for getting.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.PropertyAttribute.Set">
+            <summary>
+            Value type for setting.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.PropertyAttribute.Parent">
+            <summary>
+            Name of the parent specification (property/method/etc.) if exists or null.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.PropertyAttribute.Method">
+            <summary>
+            Actual/real method name of the parent specification if exists or null.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.PropertyAttribute.#ctor(System.String,System.String,net.r_eg.SobaScript.CValType,net.r_eg.SobaScript.CValType)">
+            <param name="name">Property name.</param>
+            <param name="description">Description for current property.</param>
+            <param name="get">Value type for getting.</param>
+            <param name="set">Value type for setting.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.PropertyAttribute.#ctor(System.String,net.r_eg.SobaScript.CValType,net.r_eg.SobaScript.CValType)">
+            <param name="name">Property name.</param>
+            <param name="get">Value type for getting.</param>
+            <param name="set">Value type for setting.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.PropertyAttribute.#ctor(System.String,System.String,System.String,System.String,net.r_eg.SobaScript.CValType,net.r_eg.SobaScript.CValType)">
+            <param name="name">Property name.</param>
+            <param name="description">Description for current property.</param>
+            <param name="parent">Name of the parent specification (property/method/etc.) if exists or null.</param>
+            <param name="method">Actual/real method name of the parent specification if exists or null.</param>
+            <param name="get">Value type for getting.</param>
+            <param name="set">Value type for setting.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.PropertyAttribute.#ctor(System.String,System.String,System.String,net.r_eg.SobaScript.CValType,net.r_eg.SobaScript.CValType)">
+            <param name="name">Property name.</param>
+            <param name="parent">Name of the parent specification (property/method/etc.) if exists or null.</param>
+            <param name="method">Actual/real method name of the parent specification if exists or null.</param>
+            <param name="get">Value type for getting.</param>
+            <param name="set">Value type for setting.</param>
+        </member>
+        <member name="T:net.r_eg.SobaScript.Mapper.SbMapper">
+            <summary>
+            Mapper for SobaScript components and their nodes.
+            https://github.com/3F/SobaScript.Mapper
+            
+            Please note: initially it was part of https://github.com/3F/vsSolutionBuildEvent
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.SbMapper.Inspector">
+            <summary>
+            Mapper of available components.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.SbMapper.EvMSBuild">
+            <summary>
+            Used instance of E-MSBuild engine.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.SbMapper.ListComponents(System.String)">
+            <param name="name">Component name</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.SbMapper.Find(System.String,System.Int32,net.r_eg.SobaScript.Mapper.KDataCommand)">
+            <param name="data">Where to look.</param>
+            <param name="offset">Position in data to start searching.</param>
+            <param name="cmd">Specified command for this search.</param>
+            <returns>Found items.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.SbMapper.Find(net.r_eg.SobaScript.Mapper.KDataCommand,net.r_eg.SobaScript.Mapper.INodeInfo,System.String)">
+            <param name="cmd"></param>
+            <param name="component">INodeInfo component for searching.</param>
+            <param name="raw">Full raw string to search.</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.SbMapper.InfoBy(System.String,net.r_eg.SobaScript.Mapper.NodeIdent,System.Boolean)">
+            <param name="name">Element name.</param>
+            <param name="ident">Identificator of node.</param>
+            <param name="strict"></param>
+            <returns>null value if not found</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.SbMapper.Region(System.String,System.Int32)">
+            <summary>
+            Gets working region for data
+            </summary>
+            <param name="data"></param>
+            <param name="offset"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Mapper.SbMapper.IsHiddenLevel(net.r_eg.SobaScript.Mapper.NodeIdent)">
+            <param name="ident"></param>
+            <returns>node of the hidden level or null value if level is not hidden</returns>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.StringHandler.DoubleQuotesContentFull">
+            <summary>
+            Specific format of double quotes with content
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Mapper.StringHandler.SingleQuotesContentFull">
+            <summary>
+            Specific format of single quotes with content
+            </summary>
+        </member>
+    </members>
+</doc>

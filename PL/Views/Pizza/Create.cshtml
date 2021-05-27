@@ -1,0 +1,27 @@
+﻿@model PL.Models.PizzaViewModel
+@{
+    ViewBag.Title = "Add pizza";
+}
+<h2>@ViewBag.Title</h2>
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.LabelFor(model => model.Name, "Name")
+    <br />
+    @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+    <br />
+    @Html.LabelFor(model => model.Price, "Price")
+    <br />
+    @Html.TextBoxFor(model => model.Price, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.Price, "", new { @class = "text-danger" })
+    <br />
+    @Html.LabelFor(model => model.Image, "Url image")
+    <br />
+    @Html.TextBoxFor(model => model.Image, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.Image, "", new { @class = "text-danger" })
+    <br />
+    @Html.ActionLink("Go back", "Index", "Pizza", null, new { @class = "btn btn-dark btn-lg" })
+    <input type="submit" value="Add pizza" class="btn btn-warning btn-lg" />
+}

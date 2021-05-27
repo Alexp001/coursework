@@ -1,0 +1,36 @@
+﻿@model PL.Models.ClientViewModel
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+<hr />
+<dl>
+    <dt>Name</dt>
+    <dd>
+        @Html.DisplayFor(model => model.Name)
+    </dd>
+
+    <dt>Phone</dt>
+    <dd>
+        @Html.DisplayFor(model => model.Phone)
+    </dd>
+
+    <dt>Email</dt>
+    <dd>
+        @Html.DisplayFor(model => model.Email)
+    </dd>
+</dl>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.Name)
+    @Html.HiddenFor(m => m.Address)
+    @Html.HiddenFor(m => m.Email)
+    @Html.HiddenFor(m => m.Phone)
+    @Html.HiddenFor(m => m.UserId)
+    @Html.ActionLink("Go back", "Index", "Client", null, new { @class = "btn btn-dark btn-lg" })
+    <input type="submit" value="Delete" class="btn btn-danger btn-lg" />
+}
+

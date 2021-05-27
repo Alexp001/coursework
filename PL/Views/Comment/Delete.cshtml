@@ -1,0 +1,28 @@
+﻿@model PL.Models.CommentViewModel
+@{
+    ViewBag.Title = "Delete";
+}
+<h2>Delete</h2>
+<hr />
+<dl>
+    <dt>Kind</dt>
+    <dd>
+        @Html.DisplayFor(model => model.KindOfComment)
+    </dd>
+
+    <dt>Mark</dt>
+    <dd>
+        @Html.DisplayFor(model => model.Mark)
+    </dd>
+
+    <dt>Text</dt>
+    <dd>
+        @Html.DisplayFor(model => model.Text)
+    </dd>
+</dl>
+
+@using (Html.BeginForm())
+{
+    @Html.ActionLink("Go back", "Index", "Comment", null, new { @class = "btn btn-dark btn-lg" })
+    <input type="submit" value="Delete" class="btn btn-danger btn-lg" />
+}

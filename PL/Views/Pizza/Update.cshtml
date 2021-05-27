@@ -1,0 +1,35 @@
+﻿@model PL.Models.PizzaViewModel
+@{
+    ViewBag.Title = "Update";
+}
+<h2>@ViewBag.Title</h2>
+<hr/>
+@using (Html.BeginForm("Update", "Pizza", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+<fieldset>
+    @Html.HiddenFor(m => m.Id)
+
+    <p>
+        @Html.LabelFor(m => m.Name, "Name")
+        <br />
+        @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Price, "Price")
+        <br />
+        @Html.EditorFor(m => m.Price, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.Price, "", new { @class = "text-danger" })
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Image, "Url image")
+        <br />
+        @Html.EditorFor(m => m.Image, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.Image, "", new { @class = "text-danger" })
+    </p>
+    @Html.ActionLink("Go back", "Index", "Pizza", null, new { @class = "btn btn-dark btn-lg" })
+    <input type="submit" value="Update" class="btn btn-warning btn-lg" />
+</fieldset>
+}
+

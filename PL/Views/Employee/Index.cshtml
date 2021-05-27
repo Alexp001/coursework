@@ -1,0 +1,55 @@
+﻿@model ICollection<PL.Models.EmployeeUserViewModel>
+@{
+    ViewBag.Title = "Employees";
+}
+<h2>@ViewBag.Title</h2>
+<table class="table table-striped">
+    <thead class="bg-dark text-white">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Salary</th>
+            <th>Position</th>
+            <th>Roles</th>
+            <th></th>
+        </tr>
+    </thead>
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <th>@item.EmployeeObject.Name</th>
+                <th>@item.EmployeeObject.Email</th>
+                <th>@item.EmployeeObject.Phone</th>
+                <th>@item.EmployeeObject.Address</th>
+                <th>@item.EmployeeObject.Salary $</th>
+                <th>@item.EmployeeObject.Position</th>
+                <th>
+                    <select class="custom-select col-10">
+                        <option selected value="s1">Roles</option>
+                        @foreach (var item1 in item.Roles)
+                        {
+                            <option disabled>
+                                @item1.Name
+                            </option>
+                        }
+                    </select>
+                </th>
+                <th>
+                    @Html.ActionLink("Update", "Update", "Employee", new { id = item.EmployeeObject.Id, }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Delete", "Delete", "Employee", new { id = item.EmployeeObject.Id, }, new { @class = "btn btn-danger" })
+                </th>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="6" class="text-center">No employee</td>
+        </tr>
+    }
+</table>
+<p> @Html.ActionLink("Add employee", "Create", "Employee", new { @class = "btn btn-warning" })</p>

@@ -1,0 +1,82 @@
+﻿@model IEnumerable<PL.Models.OrderViewModel>
+
+@{
+    ViewBag.Title = "My orders";
+}
+<h2>@ViewBag.Title</h2>
+
+<table class="table table-striped">
+    <thead class="bg-dark text-white">
+        <tr>
+            <th>Date</th>
+            <th>Client Name</th>
+            <th>Employee Name</th>
+            <th>Implementation</th>
+            <th>Pizzas</th>
+            <th>Total cost</th>
+        </tr>
+    </thead>
+    @if (Model != null && Model.Count() != 0)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <th>@item.Date</th>
+                <th>
+                    @Html.ActionLink(item.Client.Name, "ShowClient", "Order", new
+                    {
+                   name = item.Client.Name,
+                   address = item.Client.Address,
+                   email = item.Client.Email,
+                   phone = item.Client.Phone
+               }, new { @class = "btn btn-outline-primary" })
+                </th>
+                @if (item.Employee != null)
+                {
+                    <th>
+                        @item.Employee.Name
+                    </th>
+                }
+                else
+                {
+                    <th>Order not accepted</th>
+                }
+                <th>
+                    @if (item.AccountingImplementation)
+                    {
+                        <p>Completed</p>
+                    }
+                    else
+                    {
+                        <p>Not completed</p>
+
+                    }
+                </th>
+                <th>
+                    @{
+                        SelectList pizzas = new SelectList(item.Pizzas);
+                    }
+
+                    @Html.DropDownList("Pizza", pizzas as SelectList)
+
+                </th>
+                <th>
+                    @{
+                        double cost = 0;
+                        foreach (var item1 in item.Pizzas)
+                        {
+                            cost += item1.Quantity * item1.PizzaObject.Price;
+                        }
+                    }
+                    @cost $
+                </th>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="6" class="text-center">No orders</td>
+        </tr>
+    }
+</table>

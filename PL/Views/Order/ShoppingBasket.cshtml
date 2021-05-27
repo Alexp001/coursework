@@ -1,0 +1,52 @@
+﻿@model List<PL.Models.PizzaAccountingViewModel>
+@{
+    ViewBag.Title = "Shopping basket";
+    double totalСost = 0;
+    foreach (var item in Model)
+    {
+        totalСost += item.PizzaObject.Price * item.Quantity;
+    }
+}
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm("Confirm", "Order", FormMethod.Post))
+{
+<fieldset>
+    <table class="table table-striped">
+        <thead class="bg-dark text-white">
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th></th>
+            </tr>
+        </thead>
+        @if (Model != null && Model.Count != 0)
+        {
+            for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    @Html.HiddenFor(m => m[i].PizzaObject.Id)
+
+                    <th>@Model[i].PizzaObject.Name</th>
+                    <th>@Model[i].PizzaObject.Price $</th>
+                    <th>@Model[i].Quantity</th>
+                    <th>@Html.ActionLink("Delete pizza", "DeletePizza", "Order", new { id = Model[i].PizzaObject.Id }, new { @class = "btn btn-outline-danger" })</th>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3" class="text-center">Basket is empty</td>
+            </tr>
+        }
+    </table>
+    <strong>Toral cost</strong>
+    <br />
+    <text>@totalСost $</text>
+    <br />
+    <br />
+    @Html.ActionLink("Go back", "Create", "Order", null, new { @class = "btn btn-dark btn-lg" })
+    <input type="submit" value="Confirm" class="btn btn-warning btn-lg" />
+</fieldset>
+}

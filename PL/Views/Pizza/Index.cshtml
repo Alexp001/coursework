@@ -1,0 +1,54 @@
+﻿@using System.Text.Json;
+@using PL.Models;
+@using PL.RoleManager;
+@model ICollection<PL.Models.PizzaViewModel>
+@{
+    ViewBag.Title = "Catalog";
+    IEnumerable<RoleViewModel> roles;
+    bool login = HttpContext.Current.Request.Cookies["user"] == null || HttpContext.Current.Request.Cookies["user"].Value == "";
+    if (login)
+    {
+        roles = new List<RoleViewModel>();
+    }
+    else
+    {
+        roles = JsonSerializer.Deserialize<UserRoleViewModel>(HttpContext.Current.Request.Cookies["user"].Value).Roles;
+    }
+
+    string mb= String.Empty;
+    if (RolesManager.IsPizzaManager(roles))
+    {
+        mb = "mb-4";
+    }
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<div class="container d-flex flex-wrap">
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <div class=" float-left col-sm-3 @mb" style="height: 310px">
+                <img src="@item.Image" width="207" height="207" alt="No image" class="center-block">
+                <h4 class="text-center">@item.Name</h4>
+                <div class="text-center" style="">
+                    @Html.LabelFor(m => item.Price, "Price:")
+                    @item.Price $
+                </div>
+                @if (RolesManager.IsPizzaManager(roles))
+                {
+                    <div class="text-center">
+                        @Html.ActionLink("Update", "Update", "Pizza", new { id = item.Id, }, new { @class = "btn btn-warning" })
+                        @Html.ActionLink("Delete", "Delete", "Pizza", new { id = item.Id, }, new { @class = "btn btn-danger" })
+                    </div>
+                }
+            </div>
+        }
+    }
+</div>
+@if (RolesManager.IsPizzaManager(roles))
+{
+    <hr />
+    @Html.ActionLink("Add pizza", "Create", "Pizza", new { @class = "btn btn-dark btn-lg btn-block" })
+}

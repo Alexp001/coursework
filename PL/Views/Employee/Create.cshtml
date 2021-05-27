@@ -1,0 +1,75 @@
+﻿@model PL.Models.EmployeeUserViewModel
+@{
+    ViewBag.Title = "Add employee";
+}
+<h2>@ViewBag.Title</h2>
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.LabelFor(model => model.User.Login, "Login")
+    <br />
+    @Html.TextBoxFor(model => model.User.Login, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.User.Login, "", new { @class = "text-danger" })
+    <br />
+    @Html.LabelFor(model => model.User.Password, "Password")
+    <br />
+    @Html.PasswordFor(model => model.User.Password, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.User.Password, "", new { @class = "text-danger" })
+    <br />
+    @Html.LabelFor(model => model.EmployeeObject.Name, "Name")
+    <br />
+    @Html.TextBoxFor(model => model.EmployeeObject.Name, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.EmployeeObject.Name, "", new { @class = "text-danger" })
+    <br />
+    @Html.LabelFor(model => model.EmployeeObject.Email, "Email")
+    <br />
+    @Html.TextBoxFor(model => model.EmployeeObject.Email, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.EmployeeObject.Email, "", new { @class = "text-danger" })
+    <br />
+    @Html.LabelFor(model => model.EmployeeObject.Phone, "Phone")
+    <br />
+    @Html.TextBoxFor(model => model.EmployeeObject.Phone, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.EmployeeObject.Phone, "", new { @class = "text-danger" })
+    <br />
+    @Html.LabelFor(model => model.EmployeeObject.Address, "Address")
+    <br />
+    @Html.TextBoxFor(model => model.EmployeeObject.Address, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.EmployeeObject.Address, "", new { @class = "text-danger" })
+    <br />
+    @Html.LabelFor(model => model.EmployeeObject.Salary, "Salary")
+    <br />
+    @Html.TextBoxFor(model => model.EmployeeObject.Salary, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.EmployeeObject.Salary, "", new { @class = "text-danger" })
+    <br />
+    @Html.LabelFor(model => model.EmployeeObject.Position, "Position")
+    <br />
+    @Html.TextBoxFor(model => model.EmployeeObject.Position, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.EmployeeObject.Position, "", new { @class = "text-danger" })
+    <br />
+    @Html.CheckBox("roles")
+    <span>Receiver</span>
+    <br />
+    @Html.CheckBox("roles")
+    <span>Pizza manager</span>
+    <br />
+    @Html.CheckBox("roles")
+    <span>Employee manager</span>
+    <br />
+    @Html.CheckBox("roles")
+    <span>Moderator</span>
+    <br />
+    @Html.CheckBox("roles")
+    <span>Accountant</span>
+    <br />
+    @Html.CheckBox("roles")
+    <span>Client manager</span>
+    <br />
+    @Html.CheckBox("roles")
+    <span>Executor</span>
+    <br />
+    <br />
+    @Html.ActionLink("Go back", "Index", "Employee", null, new { @class = "btn btn-dark btn-lg" })
+    <input type="submit" value="Add employee" class="btn btn-warning btn-lg" />
+}
+

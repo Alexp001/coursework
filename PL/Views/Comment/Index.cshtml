@@ -1,0 +1,56 @@
+﻿@using System.Text.Json;
+@using PL.Models;
+@using PL.RoleManager;
+@model ICollection<PL.Models.CommentViewModel>
+@{
+    ViewBag.Title = "Comments";
+    IEnumerable<RoleViewModel> roles;
+    bool login = HttpContext.Current.Request.Cookies["user"] == null || HttpContext.Current.Request.Cookies["user"].Value == "";
+    if (login)
+    {
+        roles = new List<RoleViewModel>();
+    }
+    else
+    {
+        roles = JsonSerializer.Deserialize<UserRoleViewModel>(HttpContext.Current.Request.Cookies["user"].Value).Roles;
+    }
+}
+<h2>@ViewBag.Title</h2>
+<table class="table table-striped">
+    <thead class="bg-dark text-white">
+        <tr>
+            <th>Kind</th>
+            <th>Mark</th>
+            <th>Text</th>
+            @if (RolesManager.IsModerator(roles))
+            {
+                <th> </th>
+            }
+        </tr>
+    </thead>
+    @if (Model != null && Model.Count() != 0)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <th>@item.KindOfComment</th>
+                <th>@item.Mark</th>
+                <th>@item.Text</th>
+                @if (RolesManager.IsModerator(roles))
+                {
+                    <th>@Html.ActionLink("Delete", "Delete", "Comment", new { id = item.Id, }, new { @class = "btn btn-danger" })</th>
+                }
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="3" class="text-center">No comment</td>
+        </tr>
+    }
+</table>
+@if (RolesManager.IsUser(roles))
+{
+    <p> @Html.ActionLink("Leave a comment", "Create", "Comment", new { @class = "btn btn-warning btn-lg" })</p>
+}

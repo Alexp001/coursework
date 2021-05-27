@@ -1,0 +1,493 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>E-MSBuild</name>
+    </assembly>
+    <members>
+        <member name="F:net.r_eg.EvMSBuild.Analysis.variable">
+            <summary>
+            Prepared user-variable.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.Analysis.property">
+            <summary>
+            Unit of properties.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.AProperty.complex">
+            <summary>
+            Either complex phrase or simple property.
+            For example:
+             * Property Function:   $([System.DateTime]::UtcNow.Ticks)
+             * Simple property:     $(Configuration)
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.AProperty.unevaluated">
+            <summary>
+            Prepared but unevaluated data, ie. the evaluation should be from this.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.AProperty.name">
+            <summary>
+            The left definition of property.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.AProperty.scope">
+            <summary>
+            Specified scope where it was placed.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.AProperty.raw">
+            <summary>
+            Initial data.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.AVariable.name">
+            <summary>
+            Variable name.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.AVariable.scope">
+            <summary>
+            Specified context for variable.
+            ie. specific scope where to store.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.AVariable.persistence">
+            <summary>
+            Permanent storage in project files etc.
+            ~ .csproj, .vcxproj, ...
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.AVariable.type">
+            <summary>
+            Determines value type for this variable.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.AVariable.tSign">
+            <summary>
+            $({tSign}name = data)
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.AVariable.vSign">
+            <summary>
+            $(name {vSign}= data)
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.ContainerType.Normal">
+            <summary>
+            $(..)
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.ContainerType.Escaped">
+            <summary>
+            $$(..)
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.ContainerType.Unclear">
+            <summary>
+            $(..) / $$(..)
+            </summary>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.EvEnvBlank.GetMutualPropValue(System.String)">
+            <summary>
+            An unified unscoped and out of Project instance the property value by its name.
+            Remarks: Any property values cannot be null.
+            </summary>
+            <param name="name">Property name.</param>
+            <returns>Found non-null property value or null if not.</returns>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.EvEnvBlank.GetProject(System.Object)">
+            <summary>
+            Get Project instance for work with data inside specified scope.
+            </summary>
+            <param name="ident">Abstract identifier of the specified scope. It can be a GUID, or FullPath, or project name, etc.</param>
+            <returns>Expected the instance that is associated with the identifier or any default instance if not found any related to pushed ident.</returns>
+        </member>
+        <member name="T:net.r_eg.EvMSBuild.EvMSBuilder">
+            <summary>
+            [E-MSBuild]
+            
+            Advanced Evaluator of MSBuild scripts aka Advanced MSBuild 
+            with user-variables support through Varhead and more.
+            https://github.com/3F/E-MSBuild
+            
+            Please note: initially it was part of https://github.com/3F/vsSolutionBuildEvent
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.EvMSBuilder.CONTAINERS_LIMIT">
+            <summary>
+            Max of supported containers for processing.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.EvMSBuilder.references">
+            <summary>
+            References of evaluated properties.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.EvMSBuild.EvMSBuilder.UVars">
+            <summary>
+            Container of user-variables through Varhead.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.EvMSBuilder.Eval(System.String)">
+            <summary>
+            Prepare, parse, and evaluate mixed data through E-MSBuild supported syntax.
+            </summary>
+            <param name="data">Mixed input data.</param>
+            <returns>Evaluated end value.</returns>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.EvMSBuilder.Evaluate(System.String)">
+            <summary>
+            Evaluates mixed data through some engine like E-MSBuild, SobaScript, etc.
+            </summary>
+            <param name="data">Mixed input data.</param>
+            <returns>Evaluated end value.</returns>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.EvMSBuilder.GetPropValue(System.String,System.String)">
+            <summary>
+            Get evaluated variable or property value for specified scope.
+            </summary>
+            <param name="name">Access to property or variable by its name.</param>
+            <param name="scope">Where is placed. null value for global or unspecified scope.</param>
+            <returns>Evaluated value.</returns>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.EvMSBuilder.ListProperties(System.String)">
+            <summary>
+            List all properties for specified scope.
+            </summary>
+            <param name="scope"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.EvMSBuilder.SetGlobalProperty(System.String,System.String,System.String)">
+            <param name="name"></param>
+            <param name="value"></param>
+            <param name="scope">Where to place. null value for global or unspecified scope.</param>
+            <returns>Returns true if the value has changes, otherwise false.</returns>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.EvMSBuilder.RemoveGlobalProperty(System.String,System.String)">
+            <param name="name"></param>
+            <param name="scope">Where is placed. null value for global or unspecified scope.</param>
+            <returns>Returns true if the property was removed.</returns>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.EvMSBuilder.net#r_eg#EvMSBuild#IEvMSBuildEx#DefProperties(Microsoft.Build.Evaluation.Project)">
+            <summary>
+            Define properties using user-variables and specific project instance.
+            </summary>
+            <param name="project"></param>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.EvMSBuilder.Evaluate(net.r_eg.EvMSBuild.Analysis)">
+            <summary>
+            The final value from prepared information
+            </summary>
+            <param name="prepared"></param>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.EvMSBuilder.HQuotes(System.String)">
+            <summary>
+            Pre-filter for data inside quotes.
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.EvMSBuilder.CustomRule(System.String,System.String)">
+            <summary>
+            An exceptions to the general rules such as:
+            $(registry:Hive\MyKey\MySubKey@Value) etc.
+            </summary>
+            <param name="left">left operand</param>
+            <param name="right">right operand</param>
+            <returns>formatted raw to evaluation</returns>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.EvMSBuilder.GetUVarValue(System.String,System.String)">
+            <summary>
+            Getting value from User-Variables by using scope.
+            </summary>
+            <param name="name">Variable name.</param>
+            <param name="scope"></param>
+            <returns>Evaluated value.</returns>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.EvMSBuilder.GetUVarValue(System.String)">
+            <summary>
+            Getting value from User-Variables by using an unique identifier.
+            </summary>
+            <param name="ident">Unique identificator.</param>
+            <returns>Evaluated value.</returns>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.EvMSBuilder.Prepare(System.String)">
+            <summary>
+            Prepare data for the next evaluation step.
+            </summary>
+            <param name="raw">a single container eg.: '(…data…)'</param>
+            <exception cref="T:net.r_eg.EvMSBuild.Exceptions.IncorrectSyntaxException"></exception>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.EvMSBuilder.ContainerIn(System.String,net.r_eg.EvMSBuild.StringHandler,System.UInt32)">
+            <summary>
+            Handler of the general containers.
+            Moving upward from deepest container.
+            
+            $(name) or $(name:scope) or $([MSBuild]::MakeRelative($(path1), ...):scope) ..
+            https://msdn.microsoft.com/en-us/library/vstudio/dd633440%28v=vs.120%29.aspx
+            </summary>
+            <param name="data"></param>
+            <param name="sh"></param>
+            <param name="limit">Limitation to containers. Aborts if reached.</param>
+            <exception cref="T:net.r_eg.Varhead.Exceptions.LimitException"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.EvMSBuilder.GetProject(System.String)">
+            <param name="ident"></param>
+            <returns>never null</returns>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.EvMSBuilder.Unlooping(System.String,net.r_eg.EvMSBuild.Analysis,System.Boolean)">
+            <summary>
+            Operations for recursive properties and to avoiding some looping.
+            
+            The recursive property means that value contains same definition, even after evaluation of this, for example: 
+            `$(var)` -> `value from $(var)` -> `value from value from $(var)` ... 
+            
+            TODO: I need a COW... fix mooo ~@@``
+            </summary>
+            <param name="data">Data with possible recursive property or some looping.</param>
+            <param name="prepared">Describes property.</param>
+            <param name="eqEscape">To escape equality if true, otherwise throw PossibleLoopException.</param>
+            <returns>Evaluated data.</returns>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.IEvEnv.GetProject(System.Object)">
+            <summary>
+            Get Project instance for work with data inside specified scope.
+            </summary>
+            <param name="ident">Abstract identifier of the specified scope. It can be a GUID, or FullPath, or project name, etc.</param>
+            <returns>Expected the instance that is associated with the identifier or any default instance if not found any related to pushed ident.</returns>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.IEvMin.GetMutualPropValue(System.String)">
+            <summary>
+            An unified unscoped and out of Project instance the property value by its name.
+            Remarks: Any property values cannot be null.
+            </summary>
+            <param name="name">Property name.</param>
+            <returns>Found non-null property value or null if not.</returns>
+        </member>
+        <member name="T:net.r_eg.EvMSBuild.IEvMSBuild">
+            <summary>
+            [E-MSBuild]
+            
+            Advanced Evaluator of MSBuild scripts aka Advanced MSBuild 
+            with user-variables support through Varhead and more.
+            https://github.com/3F/E-MSBuild
+            
+            Please note: initially it was part of https://github.com/3F/vsSolutionBuildEvent
+            </summary>
+        </member>
+        <member name="P:net.r_eg.EvMSBuild.IEvMSBuild.UVars">
+            <summary>
+            Container of user-variables through Varhead.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.IEvMSBuild.Eval(System.String)">
+            <summary>
+            Prepare, parse, and evaluate mixed data through E-MSBuild supported syntax.
+            </summary>
+            <param name="data">Mixed input data.</param>
+            <returns>Evaluated end value.</returns>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.IEvMSBuild.GetPropValue(System.String,System.String)">
+            <summary>
+            Get evaluated variable or property value for specified scope.
+            </summary>
+            <param name="name">Access to property or variable by its name.</param>
+            <param name="scope">Where is placed. null value for global or unspecified scope.</param>
+            <returns>Evaluated value.</returns>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.IEvMSBuild.ListProperties(System.String)">
+            <summary>
+            List all properties for specified scope.
+            </summary>
+            <param name="scope"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.IEvMSBuild.SetGlobalProperty(System.String,System.String,System.String)">
+            <param name="name"></param>
+            <param name="value"></param>
+            <param name="scope">Where to place. null value for global or unspecified scope.</param>
+            <returns>Returns true if the value has changes, otherwise false.</returns>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.IEvMSBuild.RemoveGlobalProperty(System.String,System.String)">
+            <param name="name"></param>
+            <param name="scope">Where is placed. null value for global or unspecified scope.</param>
+            <returns>Returns true if the property was removed.</returns>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.IEvMSBuildEx.DefProperties(Microsoft.Build.Evaluation.Project)">
+            <summary>
+            Define properties using user-variables and specific project instance.
+            </summary>
+            <param name="project"></param>
+        </member>
+        <member name="P:net.r_eg.EvMSBuild.Pattern.IsNumber">
+            <summary>
+            Checks the numeric format.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.EvMSBuild.Pattern.ContainerEscOuter">
+            <summary>
+            Escaped outer container, eg.: -} $$(.. $(..) ...) {-
+            </summary>
+        </member>
+        <member name="P:net.r_eg.EvMSBuild.Pattern.ContainerOuter">
+            <summary>
+            Outer container, eg.: -} $(.. $(..) ...) {-
+            </summary>
+        </member>
+        <member name="P:net.r_eg.EvMSBuild.Pattern.DoubleQuotesContent">
+            <summary>
+            Content from double quotes according to E-MSBuild.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.EvMSBuild.Pattern.SingleQuotesContent">
+            <summary>
+            Content from single quotes according to E-MSBuild.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.EvMSBuild.Pattern.DoubleQuotesContentFull">
+            <summary>
+            Double quotes with content according to E-MSBuild.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.EvMSBuild.Pattern.SingleQuotesContentFull">
+            <summary>
+            Single quotes with content according to E-MSBuild.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.EvMSBuild.Pattern.ContainerInCompiled">
+            <summary>
+            Compiled ContainerIn.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.EvMSBuild.Pattern.ContainerInNamedCompiled">
+            <summary>
+            Compiled ContainerIn with naming the left definitions.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.EvMSBuild.Pattern.PItem">
+            <summary>
+            An expression of property item.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.EvMSBuild.Pattern.ContainerIn">
+            <summary>
+            Deepest container, eg.: $(.. -} $(..) {- ...)
+            </summary>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.Pattern.GetContainerIn(System.String)">
+            <summary>
+            Deepest container, eg.: $(.. -} $(..) {- ...)
+            </summary>
+            <param name="left">Condition of left bracket - `$(left`</param>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.Pattern.QuotesContent(System.Char,System.Boolean)">
+            <summary>
+            Content for presented symbol of quotes.
+            Escaping is a \ for used symbol.
+            eg.: \', \"
+            However! '\' and "\" used 'as is' for compatibility with MSBuild
+            </summary>
+            <param name="symbol">' or "</param>
+            <param name="withoutQuotes"></param>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.Pattern.Container(net.r_eg.EvMSBuild.ContainerType,System.Boolean,System.String)">
+            <summary>
+            Configurable Container.
+            </summary>
+            <param name="type"></param>
+            <param name="upward">all or only internal(deepest)</param>
+            <param name="left">Condition of left bracket - `$(left`</param>
+            <returns></returns>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.PropertyArgs.value">
+            <summary>
+            null value indicates on removed or nonexistent property.
+            </summary>
+        </member>
+        <member name="T:net.r_eg.EvMSBuild.PropertyItem">
+            <summary>
+            Basic unit of any properties.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.PropertyItem.scope">
+            <summary>
+            Scoped by this.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.EvMSBuild.StringHandler.DoubleQuotesContentFull">
+            <summary>
+            Specific format of double quotes with content
+            </summary>
+        </member>
+        <member name="P:net.r_eg.EvMSBuild.StringHandler.SingleQuotesContentFull">
+            <summary>
+            Specific format of single quotes with content
+            </summary>
+        </member>
+        <member name="M:net.r_eg.EvMSBuild.StringHandler.ProtectEscContainer(System.String)">
+            <summary>
+            Protects escaped MSBuild data.
+            </summary>
+            <param name="data"></param>
+            <returns>protected string</returns>
+        </member>
+        <member name="T:net.r_eg.EvMSBuild.TSignType">
+            <summary>
+            $({tSign}name = data)
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.TSignType.Default">
+            <summary>
+            Represents default behaviour with data.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.TSignType.DefProperty">
+            <summary>
+            Defines adding of the global property.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.TSignType.UndefProperty">
+            <summary>
+            Defines removing of the global property.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.ValueType.Property">
+            <summary>
+            Mixed property data.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.ValueType.PropertyEscaped">
+            <summary>
+            Escaped / ignored property data.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.ValueType.StringFromDouble">
+            <summary>
+            String data. Inside double quotes "…".
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.ValueType.StringFromSingle">
+            <summary>
+            String data. Inside single quotes '…'.
+            </summary>
+        </member>
+        <member name="T:net.r_eg.EvMSBuild.VSignType">
+            <summary>
+            $(name {vSign}= data)
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.VSignType.Increment">
+            <summary>
+            left += right
+            </summary>
+        </member>
+        <member name="F:net.r_eg.EvMSBuild.VSignType.Decrement">
+            <summary>
+            left -= right
+            </summary>
+        </member>
+    </members>
+</doc>

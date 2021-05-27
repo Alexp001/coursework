@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LSender</name>
+    </assembly>
+    <members>
+        <member name="E:net.r_eg.Components.ISender.Raised">
+            <summary>
+            When message is raised.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.Components.ISender.Raise(System.Object,net.r_eg.Components.Message)">
+            <summary>
+            Raises new message.
+            </summary>
+            <param name="sender"></param>
+            <param name="msg"></param>
+        </member>
+        <member name="M:net.r_eg.Components.ISender.Raise(System.Object,System.String)">
+            <summary>
+            Raises new message.
+            </summary>
+            <param name="sender"></param>
+            <param name="msg"></param>
+        </member>
+        <member name="M:net.r_eg.Components.ISender.Raise(System.Object,System.String,net.r_eg.Components.MsgLevel)">
+            <summary>
+            Raises new message.
+            </summary>
+            <param name="sender"></param>
+            <param name="msg"></param>
+            <param name="level"></param>
+        </member>
+        <member name="M:net.r_eg.Components.ISender.Raise``1(net.r_eg.Components.Message)">
+            <summary>
+            Raises new message with default sender as typeof(T).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="msg"></param>
+        </member>
+        <member name="M:net.r_eg.Components.ISender.Raise``1(System.String)">
+            <summary>
+            Raises new message with default sender as typeof(T).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="msg"></param>
+        </member>
+        <member name="M:net.r_eg.Components.ISender.Raise``1(System.String,net.r_eg.Components.MsgLevel)">
+            <summary>
+            Raises new message with default sender as typeof(T).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="msg"></param>
+            <param name="level"></param>
+        </member>
+        <member name="M:net.r_eg.Components.ISender.Revoke">
+            <summary>
+            Revokes subscription for all listeners.
+            </summary>
+        </member>
+        <member name="T:net.r_eg.Components.LSender">
+            <summary>
+            [LSender]
+            
+            Ascetic aggregative repeater for loggers etc.
+            https://github.com/3F/LSender
+            </summary>
+        </member>
+        <member name="P:net.r_eg.Components.LSender._">
+            <summary>
+            Thread-safe getting the instance of the LSender class.
+            </summary>
+        </member>
+        <member name="E:net.r_eg.Components.LSender.Raised">
+            <summary>
+            When message is raised.
+            </summary>
+        </member>
+        <member name="E:net.r_eg.Components.LSender.Sent">
+            <summary>
+            When the message was sent. Static alias.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.Components.LSender.Send(System.Object,net.r_eg.Components.Message)">
+            <summary>
+            Static alias for raising new message.
+            </summary>
+            <param name="sender"></param>
+            <param name="msg"></param>
+        </member>
+        <member name="M:net.r_eg.Components.LSender.Send(System.Object,System.String)">
+            <summary>
+            Static alias for raising new message.
+            </summary>
+            <param name="sender"></param>
+            <param name="msg"></param>
+        </member>
+        <member name="M:net.r_eg.Components.LSender.Send(System.Object,System.String,net.r_eg.Components.MsgLevel)">
+            <summary>
+            Static alias for raising new message.
+            </summary>
+            <param name="sender"></param>
+            <param name="msg"></param>
+            <param name="level"></param>
+        </member>
+        <member name="M:net.r_eg.Components.LSender.Send``1(net.r_eg.Components.Message)">
+            <summary>
+            To send new message with default sender as typeof(T).
+            Useful for static methods etc.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="msg"></param>
+        </member>
+        <member name="M:net.r_eg.Components.LSender.Send``1(System.String)">
+            <summary>
+            To send new message with default sender as typeof(T).
+            Useful for static methods etc.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="msg"></param>
+        </member>
+        <member name="M:net.r_eg.Components.LSender.Send``1(System.String,net.r_eg.Components.MsgLevel)">
+            <summary>
+            To send new message with default sender as typeof(T).
+            Useful for static methods etc.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="msg"></param>
+            <param name="level"></param>
+        </member>
+        <member name="M:net.r_eg.Components.LSender.Reset">
+            <summary>
+            Resets listeners. Static alias to revoke.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.Components.LSender.Raise(System.Object,net.r_eg.Components.Message)">
+            <summary>
+            Raises new message.
+            </summary>
+            <param name="sender"></param>
+            <param name="msg"></param>
+        </member>
+        <member name="M:net.r_eg.Components.LSender.Raise(System.Object,System.String)">
+            <summary>
+            Raises new message.
+            </summary>
+            <param name="sender"></param>
+            <param name="msg"></param>
+        </member>
+        <member name="M:net.r_eg.Components.LSender.Raise(System.Object,System.String,net.r_eg.Components.MsgLevel)">
+            <summary>
+            Raises new message.
+            </summary>
+            <param name="sender"></param>
+            <param name="msg"></param>
+            <param name="level"></param>
+        </member>
+        <member name="M:net.r_eg.Components.LSender.Raise``1(net.r_eg.Components.Message)">
+            <summary>
+            Raises new message with default sender as typeof(T).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="msg"></param>
+        </member>
+        <member name="M:net.r_eg.Components.LSender.Raise``1(System.String)">
+            <summary>
+            Raises new message with default sender as typeof(T).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="msg"></param>
+        </member>
+        <member name="M:net.r_eg.Components.LSender.Raise``1(System.String,net.r_eg.Components.MsgLevel)">
+            <summary>
+            Raises new message with default sender as typeof(T).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="msg"></param>
+            <param name="level"></param>
+        </member>
+        <member name="M:net.r_eg.Components.LSender.Revoke">
+            <summary>
+            Revokes subscription for all listeners.
+            </summary>
+        </member>
+    </members>
+</doc>

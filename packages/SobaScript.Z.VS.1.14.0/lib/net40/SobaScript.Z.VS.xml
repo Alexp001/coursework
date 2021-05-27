@@ -1,0 +1,402 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SobaScript.Z.VS</name>
+    </assembly>
+    <members>
+        <member name="P:net.r_eg.SobaScript.Z.VS.BuildComponent.Activator">
+            <summary>
+            Expression when to start processing.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.BuildComponent.Eval(System.String)">
+            <summary>
+            Prepare, parse, and evaluate mixed data through SobaScript supported syntax.
+            </summary>
+            <param name="data">Mixed input data.</param>
+            <returns>Evaluated end value.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.BuildComponent.GetProjectsMap(System.String)">
+            <summary>
+            Gets instance of ProjectsMap by solution file.
+            </summary>
+            <param name="sln">Full path to solution file.</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.BuildComponent.StCancel(net.r_eg.SobaScript.SNode.IPM)">
+            <summary>
+            To cancel the build task
+                `cancel = true`
+            </summary>
+            <param name="pm"></param>
+            <returns>found command</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.BuildComponent.StProjects(net.r_eg.SobaScript.SNode.IPM)">
+            <summary>
+            Work with configuration manager through SolutionContexts.
+            
+            http://msdn.microsoft.com/en-us/library/EnvDTE.Configuration_properties.aspx
+            http://msdn.microsoft.com/en-us/library/envdte.solutioncontext.aspx
+            
+            Sample: 
+             #[Build projects]
+            </summary>
+            <param name="pm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.BuildComponent.StProjectsFind(net.r_eg.SobaScript.SNode.IPM)">
+            <summary>
+            .find(...) level
+            </summary>
+            <param name="pm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.BuildComponent.ProjectCfg(System.String,net.r_eg.SobaScript.SNode.IPM)">
+            <summary>
+            Configuration level of project.
+            </summary>
+            <param name="projectName"></param>
+            <param name="pm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.BuildComponent.StType(net.r_eg.SobaScript.SNode.IPM)">
+            <summary>
+            Work with type of build action
+            Sample: #[Build type]
+            </summary>
+            <param name="pm"></param>
+            <returns>current type</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.BuildComponent.StSolution(net.r_eg.SobaScript.SNode.IPM)">
+            <summary>
+            Work with solution node.
+            Sample: #[Build solution]
+            </summary>
+            <param name="pm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.BuildComponent.StSlnPMap(System.String,net.r_eg.SobaScript.SNode.IPM)">
+            <summary>
+            Work with ProjectsMap of solution node.
+            </summary>
+            <param name="sln"></param>
+            <param name="pm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.BuildComponent.UseProjectsMap(net.r_eg.SobaScript.Z.VS.Build.ProjectItem,net.r_eg.SobaScript.SNode.IPM)">
+            <summary>
+            Unpacks ProjectsMap.Project struct for user.
+            </summary>
+            <param name="project"></param>
+            <param name="pm"></param>
+            <returns></returns>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Z.VS.Build.IBuildEnv.BuildType">
+            <summary>
+            Current context for actions.
+            TODO: this was migrated from BuildType enum to cover #[Build type] node only.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Z.VS.Build.IBuildEnv.IsCleanOperation">
+            <summary>
+            Clean, CleanCtx, CleanOnlyProject, CleanSelection
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Z.VS.Build.ProjectItem.name">
+            <summary>
+            The name of project.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Z.VS.Build.ProjectItem.path">
+            <summary>
+            Path to project.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Z.VS.Build.ProjectItem.type">
+            <summary>
+            Type of project.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Z.VS.Build.ProjectItem.guid">
+            <summary>
+            Guid of project.
+            </summary>
+        </member>
+        <member name="T:net.r_eg.SobaScript.Z.VS.Build.ProjectsMap">
+            <summary>
+            Detects the first / last project for build-order inside Visual Studio.
+            Based on https://gist.github.com/3F/a77129e3978841241927
+            And represents final box-solution from Sample 1 - http://vssbe.r-eg.net/doc/Examples/Demo/#sample-1
+            
+            TODO: !now we have MvsSln project https://github.com/3F/MvsSln
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Z.VS.Build.ProjectsMap.GUID_SLN_FOLDER">
+            <summary>
+            Guid of Solution Folder.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Z.VS.Build.ProjectsMap.order">
+            <summary>
+            Map of projects in direct order.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Z.VS.Build.ProjectsMap.projects">
+            <summary>
+            Map of projects by Guid.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Z.VS.Build.ProjectsMap.rProject">
+            <summary>
+            Pattern of 'Project(' line that was based on crackProjectLine from Microsoft.Build.BuildEngine.Shared.SolutionParser
+            </summary>
+        </member>
+        <member name="F:net.r_eg.SobaScript.Z.VS.Build.ProjectsMap.rProperty">
+            <summary>
+            Pattern of 'ProjectSection(ProjectDependencies)' lines that was based on crackPropertyLine from Microsoft.Build.BuildEngine.Shared.SolutionParser
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Z.VS.Build.ProjectsMap.GuidList">
+            <summary>
+            Get list of project Guids.
+            In direct order of definition.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Z.VS.Build.ProjectsMap.First">
+            <summary>
+            Get first project from defined list.
+            Ignores used Build type.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Z.VS.Build.ProjectsMap.Last">
+            <summary>
+            Get last project from defined list.
+            Ignores used Build type.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.Build.ProjectsMap.FirstBy(System.Boolean)">
+            <summary>
+            Get first project in Project Build Order.
+            </summary>
+            <param name="isCleanOperation"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.Build.ProjectsMap.LastBy(System.Boolean)">
+            <summary>
+            Get last project in Project Build Order.
+            </summary>
+            <param name="isCleanOperation"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.Build.ProjectsMap.GetProjectBy(System.String)">
+            <summary>
+            Get project by Guid string.
+            </summary>
+            <param name="guid">Identifier of project.</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.Build.ProjectsMap.Detect(System.String,System.Boolean)">
+            <summary>
+            Detect projects from solution file.
+            </summary>
+            <param name="sln">Full path to solution</param>
+            <param name="flush">Resets prev. data if true.</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.Build.ProjectsMap.#ctor(System.String)">
+            <param name="sln">Full path to solution</param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.Build.ProjectsMap.#ctor">
+            <summary>
+            Only to initialize analyzer.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.Build.ProjectsMap.Extract(System.IO.StreamReader,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}}@)">
+            <param name="reader">Used reader.</param>
+            <param name="line">Current line.</param>
+            <param name="map">Container of projects.</param>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Z.VS.DteComponent.Activator">
+            <summary>
+            Expression when to start processing.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.DteComponent.Eval(System.String)">
+            <summary>
+            Prepare, parse, and evaluate mixed data through SobaScript supported syntax.
+            </summary>
+            <param name="data">Mixed input data.</param>
+            <returns>Evaluated end value.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.DteComponent.StExec(net.r_eg.SobaScript.SNode.IPM)">
+            <summary>
+            #[DTE exec: command(arg)]
+            </summary>
+            <param name="pm"></param>
+            <returns>found command</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.DteComponent.StEvents(net.r_eg.SobaScript.SNode.IPM)">
+            <summary>
+            For work with available events.
+            #[DTE events]
+            </summary>
+            <param name="pm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.DteComponent.StLastCommand(net.r_eg.SobaScript.SNode.IPM)">
+            <summary>
+            Last received command from EnvDTE
+            </summary>
+            <param name="pm"></param>
+            <returns></returns>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Z.VS.Dte.IDteCommand.Guid">
+            <summary>
+            Scope.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Z.VS.Dte.IDteCommand.Id">
+            <summary>
+            Command.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Z.VS.Dte.IDteCommand.CustomIn">
+            <summary>
+            Input arguments for command.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Z.VS.Dte.IDteCommand.CustomOut">
+            <summary>
+            Output arguments from command.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Z.VS.Dte.IDteCommand.Cancel">
+            <summary>
+            Try to cancel command if it's possible.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Z.VS.Dte.IDteCommand.Pre">
+            <summary>
+            Before / After execution.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Z.VS.Dte.IDteEnv.IsAvaialbleDteCmd">
+            <summary>
+            Ability of work with DTE Commands.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Z.VS.Dte.IDteEnv.LastCmd">
+            <summary>
+            The last received command from EnvDTE.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.Dte.IDteEnv.Execute(System.String)">
+            <summary>
+            Execute command through EnvDTE.
+            </summary>
+            <param name="cmd"></param>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Z.VS.OwpComponent.Activator">
+            <summary>
+            Expression when to start processing.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.OwpComponent.Eval(System.String)">
+            <summary>
+            Prepare, parse, and evaluate mixed data through SobaScript supported syntax.
+            </summary>
+            <param name="data">Mixed input data.</param>
+            <returns>Evaluated end value.</returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.OwpComponent.UpdateLogInfo(System.String,System.String)">
+            <param name="message"></param>
+            <param name="level"></param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.OwpComponent.StLog(net.r_eg.SobaScript.SNode.IPM)">
+            <summary>
+                `log.Message`
+                `log.Level`
+            </summary>
+            <param name="pm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.OwpComponent.StItem(net.r_eg.SobaScript.SNode.IPM)">
+            <summary>
+            Access to OW items.
+                `item("name")`
+            </summary>
+            <param name="pm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.OwpComponent.StItemWrite(System.String,System.Boolean,net.r_eg.SobaScript.SNode.IPM)">
+            <summary>
+            To send data into OutputWindowPane window.
+                `item("name").write(true): content`
+                `item("name").writeLine(true): content`
+            </summary>
+            <param name="name"></param>
+            <param name="newline">Flag of new line symbol</param>
+            <param name="pm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.OwpComponent.StItemDelete(System.String,net.r_eg.SobaScript.SNode.IPM)">
+            <summary>
+            Removes selected pane.
+                `item("name").delete = true`
+            </summary>
+            <param name="name">Name of item</param>
+            <param name="pm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.OwpComponent.StItemClear(System.String,net.r_eg.SobaScript.SNode.IPM)">
+            <summary>
+            To clear contents from pane.
+                `item("name").clear = true`
+            </summary>
+            <param name="name"></param>
+            <param name="pm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.OwpComponent.StItemActivate(System.String,net.r_eg.SobaScript.SNode.IPM)">
+            <summary>
+            Activate item by name.
+                `item("name").activate = true`
+            </summary>
+            <param name="name"></param>
+            <param name="pm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.OwpComponent.StOut(net.r_eg.SobaScript.SNode.IPM)">
+            <summary>
+            Gets data from the output pane.
+            </summary>
+            <param name="pm"></param>
+            <returns></returns>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Z.VS.Owp.IEWData.Raw">
+            <summary>
+            Access to raw data.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Z.VS.Owp.IEWData.Errors">
+            <summary>
+            All found errors from raw data.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.SobaScript.Z.VS.Owp.IEWData.Warnings">
+            <summary>
+            All found warnings from raw data.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.Owp.ILogInfo.UpdateLogInfo(System.String,System.String)">
+            <param name="message"></param>
+            <param name="level"></param>
+        </member>
+        <member name="M:net.r_eg.SobaScript.Z.VS.Owp.IOwpEnv.Write(System.String,System.Boolean,System.String,System.Boolean)">
+            <param name="content"></param>
+            <param name="newline"></param>
+            <param name="name"></param>
+            <param name="createIfNo">Creates new if not exists when true, otherwise nothing.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

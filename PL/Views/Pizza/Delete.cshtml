@@ -1,0 +1,24 @@
+﻿@model PL.Models.PizzaViewModel
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+<hr/>
+<dl>
+    <dt>Name</dt>
+    <dd>
+        @Html.DisplayFor(model => model.Name)
+    </dd>
+
+    <dt>Price</dt>
+    <dd>
+        @Html.DisplayFor(model => model.Price) $
+    </dd>
+</dl>
+
+@using (Html.BeginForm())
+{
+    @Html.ActionLink("Go back", "Index", "Pizza", null, new { @class = "btn btn-dark btn-lg" })
+    <input type="submit" value="Delete" class="btn btn-danger btn-lg" />
+}

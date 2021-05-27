@@ -1,0 +1,149 @@
+﻿@{
+    ViewBag.Title = "Reports";
+    var dateTimeFormat = "DD.MM.YY hh:mm";
+}
+<h2>@ViewBag.Title</h2>
+<hr />
+@using (Html.BeginForm("Index", "Order", null, FormMethod.Get, new { }))
+{
+    <div class="d-flex flex-wrap w-50 float-left">
+        <div class="w-100">
+            <strong class="text-black">Get all orders: </strong>
+        </div>
+        <div class="p-2">
+            <input type="submit" value="Get report" class="btn btn-warning" />
+        </div>
+    </div>
+}
+@using (Html.BeginForm("GetOrders", "Report", null, FormMethod.Get, new { }))
+{
+    <div class="d-flex flex-wrap w-50">
+        <div class="p-2 w-100">
+            <strong class="text-black">Get orders by date: </strong>
+        </div>
+        <form method="get">
+            <input type="date" name="date1" />
+            <input type="date" name="date2" />
+            <div class="p-2 flex-fill">
+                <input type="submit" value="Get report" class="btn btn-warning" />
+            </div>
+        </form>
+    </div>}
+<br />
+@using (Html.BeginForm("GetReportByPizzaCount", "Report", null, FormMethod.Get, new { }))
+{
+    <div class="d-flex flex-wrap w-50 float-left">
+        <div class="p-2 w-100">
+            <strong class="text-black">Report on the number of pizzas sold: </strong>
+        </div>
+        <form method="get">
+            <input type="date" name="date1" />
+            <input type="date" name="date2" />
+            <div class="p-2 flex-fill">
+                <input type="submit" value="Get report" class="btn btn-warning" />
+            </div>
+        </form>
+    </div>
+}
+
+@using (Html.BeginForm("GetReportByPizzaPrice", "Report", null, FormMethod.Get, new { }))
+{
+    <div class="d-flex flex-wrap w-50">
+        <div class="p-2 w-100">
+            <strong class="text-black">Report on the price of pizzas sold: </strong>
+        </div>
+        <form method="get">
+            <input type="date" name="date1" />
+            <input type="date" name="date2" />
+            <div class="p-2 flex-fill">
+                <input type="submit" value="Get report" class="btn btn-warning" />
+            </div>
+        </form>
+    </div>
+}
+<br />
+
+@using (Html.BeginForm("GetReportByEmployeeCount", "Report", null, FormMethod.Get, new { }))
+{
+    <div class="d-flex flex-wrap w-50 float-left">
+        <div class="p-2 w-100">
+            <strong class="text-black">Employee report on the number of orders received: </strong>
+        </div>
+        <form method="get">
+            <input type="date" name="date1" />
+            <input type="date" name="date2" />
+            <div class="p-2 flex-fill">
+                <input type="submit" value="Get report" class="btn btn-warning" />
+            </div>
+        </form>
+    </div>
+}
+
+@using (Html.BeginForm("GetReportByEmployeePrice", "Report", null, FormMethod.Get, new { }))
+{
+    <div class="d-flex flex-wrap w-50">
+        <div class="p-2 w-100">
+            <strong class="text-black">Employee report on the price of orders received: </strong>
+        </div>
+        <form method="get">
+            <input type="date" name="date1" />
+            <input type="date" name="date2" />
+            <div class="p-2 flex-fill">
+                <input type="submit" value="Get report" class="btn btn-warning" />
+            </div>
+        </form>
+    </div>
+}
+<br />
+@using (Html.BeginForm("GetReportByClient", "Report", null, FormMethod.Get, new { }))
+{
+    <div class="d-flex flex-wrap w-50 float-left">
+        <div class="p-2 w-100">
+            <strong class="text-black">Client report on the number of orders received: </strong>
+        </div>
+        <form method="get">
+            <input type="date" name="date1" />
+            <input type="date" name="date2" />
+            <div class="p-2 flex-fill">
+                <input type="submit" value="Get report" class="btn btn-warning" />
+            </div>
+        </form>
+    </div>
+}
+@using (Html.BeginForm("GetTotalPrice", "Report", null, FormMethod.Get, new { }))
+{
+    <div class="d-flex flex-wrap w-50">
+        <div class="p-2 w-100">
+            <strong class="text-black">Total price per day: </strong>
+        </div>
+        <form method="get">
+            <input type="date" name="date1" />
+            <input type="date" name="date2" />
+            <div class="p-2 flex-fill">
+                <input type="submit" value="Get report" class="btn btn-warning" />
+            </div>
+        </form>
+    </div>
+}
+<br />
+<button type="button" class="btn btn-dark btn-lg" onclick="location.href='javascript: history.go(-1)'">Go Back</button>
+
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('#DateTimePicker').datetimepicker({
+                locale: 'ru',
+                format: '@dateTimeFormat',
+                minDate: moment(),
+            });
+        });
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.0/locale/ru.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.0/locale/be.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js" integrity="sha512-k6/Bkb8Fxf/c1Tkyl39yJwcOZ1P4cRrJu77p83zJjN2Z55prbFHxPs9vN7q3l3+tSMGPDdoH51AEU8Vgo1cgAA==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.css" integrity="sha512-ClXpwbczwauhl7XC16/EFu3grIlYTpqTYOwqwAi7rNSqxmTqCpE8VS3ovG+qi61GoxSLnuomxzFXDNcPV1hvCQ==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+}
+

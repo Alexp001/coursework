@@ -1,0 +1,94 @@
+﻿@using System.Text.Json;
+@using PL.Models;
+@using PL.RoleManager;
+@{
+    IEnumerable<RoleViewModel> roles;
+    bool login = HttpContext.Current.Request.Cookies["user"] == null || HttpContext.Current.Request.Cookies["user"].Value == "";
+    if (login)
+    {
+        roles = new List<RoleViewModel>();
+    }
+    else
+    {
+        roles = JsonSerializer.Deserialize<UserRoleViewModel>(HttpContext.Current.Request.Cookies["user"].Value).Roles;
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Pizzeria</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body style="padding:0">
+    <div class="navbar fixed-top navbar-expand-sm navbar-light bg-dark border-bottom box-shadow mb-3">
+        <div class="container">
+            <div class="navbar-header">
+                @Html.ActionLink("Pizzeria", "Index", "Home", new { area = "" }, new { @class = "navbar-brand text-white" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Catalog", "Index", "Pizza", null, new { @class = "nav-link text-white" })</li>
+                    <li>@Html.ActionLink("Comments", "Index", "Comment", null, new { @class = "nav-link text-white" })</li>
+                    @if (RolesManager.IsUser(roles))
+                    {
+                        <li>@Html.ActionLink("Make an order", "Create", "Order", null, new { @class = "nav-link text-white" })</li>
+                        <li>@Html.ActionLink("My orders", "Index", "MyOrders", null, new { @class = "nav-link text-white" })</li>
+                    }
+                    @if (RolesManager.IsReciver(roles))
+                    {
+                        <li>@Html.ActionLink("Take orders", "ShowOrder", "Order", null, new { @class = "nav-link text-white" })</li>
+                    }
+                    @if (RolesManager.IsExecutor(roles))
+                    {
+                        <li>@Html.ActionLink("Сomplete order", "ShowOrderForExecutor", "Order", null, new { @class = "nav-link text-white" })</li>
+                    }
+                    @if (RolesManager.IsEmployeeManager(roles))
+                    {
+                        <li>@Html.ActionLink("Employees", "Index", "Employee", null, new { @class = "nav-link text-white" })</li>
+                    }
+                    @if (RolesManager.IsClientManager(roles))
+                    {
+                        <li>@Html.ActionLink("Clients", "Index", "Client", null, new { @class = "nav-link text-white" })</li>
+                    }
+                    @if (RolesManager.IsAccountant(roles))
+                    {
+                        <li>@Html.ActionLink("Reports", "Index", "Report", null, new { @class = "nav-link text-white" })</li>
+                    }
+                </ul>
+
+                <div class=" navbar-collapse collapse d-sm-inline-flex flex-lg-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+
+                        @if (login)
+                        {
+
+                            <li>@Html.ActionLink("Sign in", "Index", "Login", null, new { @class = "nav-link text-white" })</li>
+                            <li>@Html.ActionLink("Sign up", "Create", "Client", null, new { @class = "nav-link text-white" })</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Account", "Index", "Account", null, new { @class = "nav-link text-white" })</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="p-5"></div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Pizzeria</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,9 @@
+﻿@model PL.Models.UserViewModel
+@{
+    ViewBag.Title = "Index";
+}
+    <h2>@Model.Login</h2>
+    <hr/>
+    @Html.ActionLink("Change password", "ChangePassword", "Account", new { login = Model.Login }, new { @class = "btn btn-dark" })
+    @Html.ActionLink("Log out", "LogOut", "Account", new { @class = "btn btn-warning" })
+

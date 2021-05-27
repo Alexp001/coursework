@@ -1,0 +1,560 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Varhead</name>
+    </assembly>
+    <members>
+        <member name="M:net.r_eg.Varhead.EvaluatorBlank.Evaluate(System.String)">
+            <summary>
+            Evaluates mixed data through some engine like E-MSBuild, SobaScript, etc.
+            </summary>
+            <param name="data">Mixed input data.</param>
+            <returns>Evaluated end value.</returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.IEvaluator.Evaluate(System.String)">
+            <summary>
+            Evaluates mixed data through some engine like E-MSBuild, SobaScript, etc.
+            </summary>
+            <param name="data">Mixed input data.</param>
+            <returns>Evaluated end value.</returns>
+        </member>
+        <member name="T:net.r_eg.Varhead.IUVars">
+            <summary>
+            [Varhead]
+            
+            Evaluator of user variables and more.
+            Designed for SobaScript, E-MSBuild, and so on.
+            https://github.com/3F/Varhead
+            </summary>
+        </member>
+        <member name="P:net.r_eg.Varhead.IUVars.Definitions">
+            <summary>
+            Exposes the enumerable for defined names of user-variables.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.Varhead.IUVars.Variables">
+            <summary>
+            Exposes the enumerable for defined user-variables.
+            </summary>
+        </member>
+        <member name="M:net.r_eg.Varhead.IUVars.GetValue(System.String,System.String)">
+            <summary>
+            Getting value of user-variable by using specific scope.
+            </summary>
+            <param name="name">Variable name.</param>
+            <param name="scope">Specified scope for this variable.</param>
+            <returns>Evaluated value of variable or null if variable not defined.</returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.IUVars.GetValue(System.String)">
+            <summary>
+            Getting value of user-variable by using unique identification.
+            </summary>
+            <param name="ident">Unique identificator.</param>
+            <returns>Evaluated value of variable.</returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.IUVars.GetVariable(System.String,System.String)">
+            <summary>
+            Get user-variable struct by using specific scope.
+            </summary>
+            <param name="name">Variable name.</param>
+            <param name="scope">Specified scope for this variable.</param>
+            <returns>Struct of user-variable.</returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.IUVars.GetVariable(System.String)">
+            <summary>
+            Get user-variable struct by using unique identification.
+            </summary>
+            <param name="ident">Unique identificator.</param>
+            <returns>Struct of user-variable.</returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.IUVars.SetVariable(System.String,System.String,System.String)">
+            <summary>
+            Defines user-variable.
+            Value setted as unevaluated.
+            </summary>
+            <param name="name">Variable name.</param>
+            <param name="scope">Specified scope for this variable.</param>
+            <param name="unevaluated">Mixed string with unevaluated data.</param>
+        </member>
+        <member name="M:net.r_eg.Varhead.IUVars.Evaluate(System.String,System.String,net.r_eg.Varhead.IEvaluator,System.Boolean)">
+            <summary>
+            Evaluate user-variable with IEvaluator by using specific scope.
+            An evaluated value should be updated for variable.
+            </summary>
+            <param name="name">Variable name for evaluating</param>
+            <param name="scope">Specified scope for this variable.</param>
+            <param name="evaluator">IEvaluator objects for evaluating</param>
+            <param name="resetting">To reset IEvaluator chain to initial state if true. Otherwise, evaluation can be in the chain of other evaluators.</param>
+        </member>
+        <member name="M:net.r_eg.Varhead.IUVars.Evaluate(System.String,net.r_eg.Varhead.IEvaluator,System.Boolean)">
+            <summary>
+            Evaluate user-variable with IEvaluator by using unique identification.
+            An evaluated value should be updated for variable.
+            </summary>
+            <param name="ident">Unique identificator</param>
+            <param name="evaluator">IEvaluator objects for evaluating</param>
+            <param name="resetting">To reset IEvaluator chain to initial state if true. Otherwise, evaluation can be in the chain of other evaluators.</param>
+        </member>
+        <member name="M:net.r_eg.Varhead.IUVars.IsUnevaluated(System.String,System.String)">
+            <summary>
+            Is this variable with completed evaluation or not?
+            </summary>
+            <param name="name">Variable name.</param>
+            <param name="scope">Specified scope for this variable.</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.IUVars.IsUnevaluated(System.String)">
+            <summary>
+            Checking for variable - completed evaluation or not
+            by using unique identification
+            </summary>
+            <param name="ident">Unique identificator</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.IUVars.IsExist(System.String,System.String)">
+            <summary>
+            Checking existence of variable
+            by using specifc scope.
+            </summary>
+            <param name="name">Variable name.</param>
+            <param name="scope">Specified scope for this variable.</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.IUVars.IsExist(System.String)">
+            <summary>
+            Checking existence of variable 
+            by using unique identification
+            </summary>
+            <param name="ident">Unique identificator</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.IUVars.Unset(System.String,System.String)">
+            <summary>
+            Removes user-variable
+            by using specifc scope.
+            </summary>
+            <param name="name">Variable name.</param>
+            <param name="scope">Specified scope for this variable.</param>
+        </member>
+        <member name="M:net.r_eg.Varhead.IUVars.Unset(System.String)">
+            <summary>
+            Removes user-variable
+            by using unique identification
+            </summary>
+            <param name="ident">Unique identificator</param>
+        </member>
+        <member name="M:net.r_eg.Varhead.IUVars.UnsetAll">
+            <summary>
+            Removes all user-variables
+            </summary>
+        </member>
+        <member name="T:net.r_eg.Varhead.IUVarsExt">
+            <summary>
+            Debugging and complex support for IUserVariable
+            </summary>
+        </member>
+        <member name="M:net.r_eg.Varhead.IUVarsExt.SetEvaluated(System.String,System.String)">
+            <summary>
+            Re/Defines user-variable with evaluated value.
+            </summary>
+            <param name="ident">Unique identificator</param>
+            <param name="evaluated">mixed string with evaluated data</param>
+        </member>
+        <member name="T:net.r_eg.Varhead.SProtectorAbstract">
+            <summary>
+            This variant is based on storing of tokens inside string.
+            It's simply, but we have a some problems (like with guid) and other inconvenience from final strings.
+            As alternative for this, we should implement the nodes storing (like SobaScript SNode) to abstract build of all final strings by tokens etc. 
+            Well, currently we're simple :)
+            </summary>
+        </member>
+        <member name="F:net.r_eg.Varhead.SProtectorAbstract.RECOVERY_LIMIT">
+            <summary>
+            Maximum of nesting level to recovery operation
+            </summary>
+        </member>
+        <member name="F:net.r_eg.Varhead.SProtectorAbstract.strings">
+            <summary>
+            Storage of protected strings
+            Contains the all protected strings for recovery operations.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.Varhead.SProtectorAbstract.recoveryLevel">
+            <summary>
+            Current level of nesting recovery operation.
+            Aborting if reached limit
+            </summary>
+        </member>
+        <member name="F:net.r_eg.Varhead.SProtectorAbstract.ident">
+            <summary>
+            Unsigned identifier of tokens.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.Varhead.SProtectorAbstract.guid">
+            <summary>
+            Unique identifier between all protectors.
+            TODO
+            </summary>
+        </member>
+        <member name="P:net.r_eg.Varhead.SProtectorAbstract.DoubleQuotesContentFull">
+            <summary>
+            Specific format of double quotes with content
+            </summary>
+        </member>
+        <member name="P:net.r_eg.Varhead.SProtectorAbstract.SingleQuotesContentFull">
+            <summary>
+            Specific format of single quotes with content
+            </summary>
+        </member>
+        <member name="P:net.r_eg.Varhead.SProtectorAbstract.UID">
+            <summary>
+            Unique identifier for current protector.
+            </summary>
+        </member>
+        <member name="P:net.r_eg.Varhead.SProtectorAbstract.IdentNext">
+            <summary>
+            Generates and returns the next ident number
+            </summary>
+        </member>
+        <member name="P:net.r_eg.Varhead.SProtectorAbstract.Ident">
+            <summary>
+            Get current ident number
+            </summary>
+        </member>
+        <member name="M:net.r_eg.Varhead.SProtectorAbstract.ProtectMixedQuotes(System.String)">
+            <summary>
+            Protects data inside mixed quotes.
+            </summary>
+            <param name="data"></param>
+            <returns>protected string</returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.SProtectorAbstract.ProtectSingleQuotes(System.String)">
+            <summary>
+            Protects data inside single quotes.
+            </summary>
+            <param name="data"></param>
+            <returns>protected string</returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.SProtectorAbstract.ProtectDoubleQuotes(System.String)">
+            <summary>
+            Protects data inside double quotes.
+            </summary>
+            <param name="data"></param>
+            <returns>protected string</returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.SProtectorAbstract.ProtectByPattern(System.String,System.String)">
+            <summary>
+            Protects data with custom pattern.
+            </summary>
+            <param name="data"></param>
+            <param name="pattern">Pattern with first ($1) capture group.</param>
+            <returns>protected string</returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.SProtectorAbstract.Recovery(System.String)">
+            <summary>
+            Restores the all protected data for strings.
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.SProtectorAbstract.Flush">
+            <summary>
+            Flushes internal storage for protected strings
+            </summary>
+        </member>
+        <member name="M:net.r_eg.Varhead.SProtectorAbstract.ReplacementFormat(System.String)">
+            <summary>
+            Format of protection.
+            </summary>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.SProtectorAbstract.ProtectQuotes(System.String@,System.String)">
+            <summary>
+            Protects data inside quotes by format.
+            </summary>
+            <param name="data"></param>
+            <param name="format">type/s of quotes</param>
+            <returns>protected string</returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.SProtectorAbstract.ReplacerIn(System.Text.RegularExpressions.Match)">
+            <summary>
+            Replacer by default for protection inside strings.
+            </summary>
+            <param name="m"></param>
+            <returns>string with changed data</returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.SProtectorAbstract.ReplacementIn(System.UInt32)">
+            <summary>
+            How to protect data.
+            </summary>
+            <param name="ident">Unique identificator</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.SProtectorAbstract.ReplacementOut">
+            <summary>
+            How to recover data from strings.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.Tokens.EscapeCharacters(System.String,System.Boolean)">
+            <summary>
+            Handler of the escape-sequences.
+            
+                hexadecimal-escape-sequence:
+                    \x   0-0xF  [0-0xF  [0-0xF  [0-0xF]]]
+                https://msdn.microsoft.com/en-us/library/aa691087%28v=vs.71%29.aspx
+                
+                unicode-escape-sequence:
+                    \u   0-0xF  0-0xF  0-0xF  0-0xF
+                    \U   0-0xF  0-0xF  0-0xF  0-0xF  0-0xF  0-0xF  0-0xF  0-0xF
+                https://msdn.microsoft.com/en-us/library/aa664669%28v=vs.71%29.aspx
+            </summary>
+            <param name="data"></param>
+            <param name="limited">Use limited set of combinations if true.</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.Tokens.UnescapeQuotes(System.Char,System.String)">
+            <summary>
+            Unescape quote symbols from string.
+            </summary>
+            <param name="type">The quote character.</param>
+            <param name="data"></param>
+            <returns>Final string with an unescaped quote symbols.</returns>
+        </member>
+        <member name="F:net.r_eg.Varhead.TVariable.evaluated">
+            <summary>
+            Contains the evaluated data or escaped variable/property (without escape symbol)
+            Using from current the unevaluated field
+            </summary>
+        </member>
+        <member name="F:net.r_eg.Varhead.TVariable.unevaluated">
+            <summary>
+            Contains the unevaluated mixed data
+            May contain the another user-variable etc.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.Varhead.TVariable.ident">
+            <summary>
+            Identifier of current variable.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.Varhead.TVariable.name">
+            <summary>
+            Front-end variable name if used.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.Varhead.TVariable.scope">
+            <summary>
+            Context of variable if used.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.Varhead.TVariable.status">
+            <summary>
+            Current status of evaluation.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.Varhead.TVariable.prev">
+            <summary>
+            Previous TUserVariable if exist.
+            This probably can be used for self redefinition varname = varname
+            e.g. for post-processing with MSBuild is required to evaluation of new value etc.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.Varhead.TVariable.persistence">
+            <summary>
+            Flag of permanent storage.
+            External containers or ~ .csproj, .vcxproj, ... etc.
+            </summary>
+            <remarks>reserved</remarks>
+        </member>
+        <member name="T:net.r_eg.Varhead.UVars">
+            <summary>
+            [Varhead]
+            
+            Evaluator of user variables and more.
+            Designed for SobaScript, E-MSBuild, and so on.
+            https://github.com/3F/Varhead
+            </summary>
+        </member>
+        <member name="F:net.r_eg.Varhead.UVars.definitions">
+            <summary>
+            Contains all defined user-variables.
+            
+            !!! Note: ConcurrentDictionary used Nodes! order is unpredictable - see m_tables and internal adding
+            http://referencesource.microsoft.com/#mscorlib/system/Collections/Concurrent/ConcurrentDictionary.cs
+            https://bitbucket.org/3F/vssolutionbuildevent/commits/34cdc43df67#comment-1330734
+            
+            Also variant use the both SynchronizedCollection/BlockingCollection + ConcurrentDictionary for O(1) operations
+            </summary>
+        </member>
+        <member name="P:net.r_eg.Varhead.UVars.Definitions">
+            <summary>
+            Exposes the enumerable for defined names of user-variables
+            </summary>
+        </member>
+        <member name="P:net.r_eg.Varhead.UVars.Variables">
+            <summary>
+            Exposes the enumerable for defined user-variables
+            </summary>
+        </member>
+        <member name="M:net.r_eg.Varhead.UVars.GetValue(System.String,System.String)">
+            <summary>
+            Getting value of user-variable by using specific scope.
+            </summary>
+            <param name="name">Variable name.</param>
+            <param name="scope">Specified scope for this variable.</param>
+            <returns>Evaluated value of variable or null if variable not defined.</returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.UVars.GetValue(System.String)">
+            <summary>
+            Getting value of user-variable by using unique identification
+            </summary>
+            <param name="ident">Unique identificator</param>
+            <returns>Evaluated value of variable</returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.UVars.GetVariable(System.String,System.String)">
+            <summary>
+            Get user-variable struct by using specific scope.
+            </summary>
+            <param name="name">Variable name.</param>
+            <param name="scope">Specified scope for this variable.</param>
+            <returns>Struct of user-variable.</returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.UVars.GetVariable(System.String)">
+            <summary>
+            Get user-variable struct by using unique identification
+            </summary>
+            <param name="ident">Unique identificator</param>
+            <returns>Struct of user-variable</returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.UVars.SetVariable(System.String,System.String,System.String)">
+            <summary>
+            Defines user-variable.
+            Value setted as unevaluated.
+            </summary>
+            <param name="name">Variable name.</param>
+            <param name="scope">Specified scope for this variable.</param>
+            <param name="unevaluated">Mixed string with unevaluated data.</param>
+        </member>
+        <member name="M:net.r_eg.Varhead.UVars.Evaluate(System.String,System.String,net.r_eg.Varhead.IEvaluator,System.Boolean)">
+            <summary>
+            Evaluate user-variable with IEvaluator by using specific scope.
+            An evaluated value should be updated for variable.
+            </summary>
+            <param name="name">Variable name for evaluating</param>
+            <param name="scope">Specified scope for this variable.</param>
+            <param name="evaluator">IEvaluator objects for evaluating</param>
+            <param name="resetting">To reset IEvaluator chain to initial state if true. Otherwise, evaluation can be in the chain of other evaluators.</param>
+        </member>
+        <member name="M:net.r_eg.Varhead.UVars.Evaluate(System.String,net.r_eg.Varhead.IEvaluator,System.Boolean)">
+            <summary>
+            Evaluate user-variable with IEvaluator by using unique identification.
+            An evaluated value should be updated for variable.
+            </summary>
+            <param name="ident">Unique identificator</param>
+            <param name="evaluator">IEvaluator objects for evaluating</param>
+            <param name="resetting">To reset IEvaluator chain to initial state if true. Otherwise, evaluation can be in the chain of other evaluators.</param>
+        </member>
+        <member name="M:net.r_eg.Varhead.UVars.IsUnevaluated(System.String,System.String)">
+            <summary>
+            Is this variable with completed evaluation or not?
+            </summary>
+            <param name="name">Variable name.</param>
+            <param name="scope">Specified scope for this variable.</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.UVars.IsUnevaluated(System.String)">
+            <summary>
+            Checking for variable - completed evaluation or not
+            by using unique identification
+            </summary>
+            <param name="ident">Unique identificator</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.UVars.IsExist(System.String,System.String)">
+            <summary>
+            Checking existence of variable
+            by using specifc scope.
+            </summary>
+            <param name="name">Variable name.</param>
+            <param name="scope">Specified scope for this variable.</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.UVars.IsExist(System.String)">
+            <summary>
+            Checking existence of variable 
+            by using unique identification
+            </summary>
+            <param name="ident">Unique identificator</param>
+            <returns></returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.UVars.IsValidName(System.String)">
+            <summary>
+            Validation of variable name
+            </summary>
+            <param name="name">variable name</param>
+            <returns>Is valid or not</returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.UVars.IsValidScope(System.String)">
+            <summary>
+            Validation of scope name.
+            </summary>
+            <param name="scope"></param>
+            <returns>Is valid or not</returns>
+        </member>
+        <member name="M:net.r_eg.Varhead.UVars.Unset(System.String,System.String)">
+            <summary>
+            Removes user-variable
+            by using specifc scope.
+            </summary>
+            <param name="name">Variable name.</param>
+            <param name="scope">Specified scope for this variable.</param>
+            <exception cref="T:System.ArgumentNullException">key is null</exception>
+        </member>
+        <member name="M:net.r_eg.Varhead.UVars.Unset(System.String)">
+            <summary>
+            Removes user-variable
+            by using unique identification
+            </summary>
+            <param name="ident">Unique identificator</param>
+        </member>
+        <member name="M:net.r_eg.Varhead.UVars.UnsetAll">
+            <summary>
+            Remove all user-variables
+            </summary>
+        </member>
+        <member name="M:net.r_eg.Varhead.UVars.SetEvaluated(System.String,System.String)">
+            <summary>
+            Re/Defines user-variable with evaluated value.
+            </summary>
+            <param name="ident">Unique identificator</param>
+            <param name="evaluated">mixed string with evaluated data</param>
+        </member>
+        <member name="M:net.r_eg.Varhead.UVars.DefIndex(System.String,System.String)">
+            <summary>
+            Used key-index for definitions
+            </summary>
+        </member>
+        <member name="T:net.r_eg.Varhead.ValStatus">
+            <summary>
+            Available states when evaluating.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.Varhead.ValStatus.Unevaluated">
+            <summary>
+            Stored 'as is'.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.Varhead.ValStatus.Started">
+            <summary>
+            Evaluation is in progress.
+            </summary>
+        </member>
+        <member name="F:net.r_eg.Varhead.ValStatus.Evaluated">
+            <summary>
+            Final value.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,31 @@
+﻿@model PL.Models.EmployeeViewModel
+@{
+    ViewBag.Title = "ShowEmployee";
+}
+<div class="modal-content">
+    <div class="modal-header">
+        <h4>Employee</h4>
+        <button type="button" class="close" data-dismiss="modal" area-hidden="true" onclick="location.href='javascript: history.go(-1)'">X</button>
+    </div>
+    <div class="modal-body">
+        <dl class="dl-horizontal">
+            <dt>Name:</dt>
+            <dd>@Html.DisplayFor(model => model.Name)</dd>
+
+            <dt>Address:</dt>
+            <dd>@Html.DisplayFor(model => model.Address)</dd>
+
+            <dt>Email:</dt>
+            <dd>@Html.DisplayFor(model => model.Email)</dd>
+
+            <dt>Email:</dt>
+            <dd>@Html.DisplayFor(model => model.Phone)</dd>
+
+            <dt>Salary:</dt>
+            <dd>@Html.DisplayFor(model => model.Salary) $</dd>
+
+            <dt>Position:</dt>
+            <dd>@Html.DisplayFor(model => model.Position)</dd>
+        </dl>
+    </div>
+</div>

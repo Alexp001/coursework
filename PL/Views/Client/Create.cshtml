@@ -1,0 +1,43 @@
+﻿@model PL.Models.ClientUserViewModel
+@{
+    ViewBag.Title = "Sign up";
+}
+<h2>@ViewBag.Title</h2>
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    @Html.LabelFor(model => model.User.Login, "Login")
+    <br />
+    @Html.TextBoxFor(model => model.User.Login, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.User.Login, "", new { @class = "text-danger" })
+    <br />
+    @Html.LabelFor(model => model.User.Password, "Password")
+    <br />
+    @Html.PasswordFor(model => model.User.Password, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.User.Password, "", new { @class = "text-danger" })
+    <br />
+    @Html.LabelFor(model => model.ClientObject.Name, "Name")
+    <br />
+    @Html.TextBoxFor(model => model.ClientObject.Name, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.ClientObject.Name, "", new { @class = "text-danger" })
+    <br />
+    @Html.LabelFor(model => model.ClientObject.Email, "Email")
+    <br />
+    @Html.TextBoxFor(model => model.ClientObject.Email, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.ClientObject.Email, "", new { @class = "text-danger" })
+    <br />
+    @Html.LabelFor(model => model.ClientObject.Phone, "Phone")
+    <br />
+    @Html.TextBoxFor(model => model.ClientObject.Phone, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.ClientObject.Phone, "", new { @class = "text-danger" })
+    <br />
+    @Html.LabelFor(model => model.ClientObject.Address, "Address")
+    <br />
+    @Html.TextBoxFor(model => model.ClientObject.Address, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.ClientObject.Address, "", new { @class = "text-danger" })
+    <br />
+    @Html.ActionLink("Go back", "Index", "Home", null, new { @class = "btn btn-dark btn-lg" })
+    <input type="submit" value="Sign up" class="btn btn-warning btn-lg">
+}

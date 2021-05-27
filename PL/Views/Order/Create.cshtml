@@ -1,0 +1,32 @@
+﻿@model ICollection<PL.Models.PizzaViewModel>
+@{
+    ViewBag.Title = "Make an order";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<div class="container d-flex flex-wrap">
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <div class=" float-left col-sm-3" style="height: 310px">
+                <img src="@item.Image" width="207" height="207" alt="No image" class="center-block">
+                <h4 class="text-center">@item.Name</h4>
+                <div class="float-left text-center col-lg-5" style="">
+                    @item.Price $
+                </div>
+                <div class="center-block">
+                    @Html.ActionLink("Choose", "AddPizza", "Order", new { id = item.Id, name = item.Name, price = item.Price, image = item.Image }, new { @class = "btn btn-warning" })
+                </div>
+            </div>
+        }
+    }
+
+</div>
+<br />
+<hr />
+
+@Html.ActionLink("ShoppingBasket", "ShoppingBasket", "Order", new { @class = "btn btn-dark btn-block btn-lg" })
+
+

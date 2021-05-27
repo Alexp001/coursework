@@ -1,0 +1,131 @@
+﻿@using PL.RoleManager
+@model PL.Models.EmployeeUserViewModel
+@{
+    ViewBag.Title = "Update";
+}
+<h2>@ViewBag.Title</h2>
+<hr />
+@using (Html.BeginForm("Update", "Employee", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+<fieldset>
+    @Html.HiddenFor(m => m.EmployeeObject.Id)
+    @Html.HiddenFor(m => m.EmployeeObject.UserId)
+    @Html.HiddenFor(m => m.User.Id)
+    @Html.HiddenFor(m => m.User.Login)
+    @Html.HiddenFor(m => m.User.Password)
+    <p>
+        @Html.LabelFor(m => m.EmployeeObject.Name, "Name")
+        <br />
+        @Html.EditorFor(m => m.EmployeeObject.Name, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.EmployeeObject.Name, "", new { @class = "text-danger" })
+    </p>
+    <p>
+        @Html.LabelFor(m => m.EmployeeObject.Email, "Email")
+        <br />
+        @Html.EditorFor(m => m.EmployeeObject.Email, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.EmployeeObject.Email, "", new { @class = "text-danger" })
+    </p>
+    <p>
+        @Html.LabelFor(m => m.EmployeeObject.Phone, "Phone")
+        <br />
+        @Html.EditorFor(m => m.EmployeeObject.Phone, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.EmployeeObject.Phone, "", new { @class = "text-danger" })
+    </p>
+    <p>
+        @Html.LabelFor(m => m.EmployeeObject.Address, "Address")
+        <br />
+        @Html.EditorFor(m => m.EmployeeObject.Address, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.EmployeeObject.Address, "", new { @class = "text-danger" })
+    </p>
+    <p>
+        @Html.LabelFor(m => m.EmployeeObject.Salary, "Salary")
+        <br />
+        @Html.EditorFor(m => m.EmployeeObject.Salary, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.EmployeeObject.Salary, "", new { @class = "text-danger" })
+    </p>
+    <p>
+        @Html.LabelFor(m => m.EmployeeObject.Position, "Position")
+        <br />
+        @Html.EditorFor(m => m.EmployeeObject.Position, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(m => m.EmployeeObject.Position, "", new { @class = "text-danger" })
+    </p>
+    @if (RolesManager.IsReciver(Model.Roles))
+    {
+        @Html.CheckBox("roles", true)
+    }
+    else
+    {
+        @Html.CheckBox("roles", false)
+    }
+    <span>Receiver</span>
+    <br />
+    @if (RolesManager.IsPizzaManager(Model.Roles))
+    {
+        @Html.CheckBox("roles", true)
+    }
+    else
+    {
+        @Html.CheckBox("roles", false)
+
+    }
+    <span>Pizza manager</span>
+    <br />
+    @if (RolesManager.IsEmployeeManager(Model.Roles))
+    {
+        @Html.CheckBox("roles", true)
+    }
+    else
+    {
+        @Html.CheckBox("roles", false)
+    }
+    <span>Employee manager</span>
+    <br />
+    @if (RolesManager.IsModerator(Model.Roles))
+    {
+        @Html.CheckBox("roles", true)
+    }
+    else
+    {
+        @Html.CheckBox("roles", false)
+
+    }
+    <span>Moderator</span>
+    <br />
+    @if (RolesManager.IsAccountant(Model.Roles))
+    {
+        @Html.CheckBox("roles", true)
+    }
+    else
+    {
+        @Html.CheckBox("roles", false)
+
+    }
+    <span>Accountant</span>
+    <br />
+    @if (RolesManager.IsClientManager(Model.Roles))
+    {
+        @Html.CheckBox("roles", true)
+    }
+    else
+    {
+        @Html.CheckBox("roles", false)
+    }
+    <span>Client manager</span>
+    <br />
+    @if (RolesManager.IsExecutor(Model.Roles))
+    {
+        @Html.CheckBox("roles", true)
+    }
+    else
+    {
+        @Html.CheckBox("roles", false)
+    }
+    <span>Executor</span>
+    <br />
+    <br />
+    @Html.ActionLink("Go back", "Index", "Employee", null, new { @class = "btn btn-dark btn-lg" })
+    <input type="submit" value="Update" class="btn btn-warning btn-lg" />
+</fieldset>
+}
+

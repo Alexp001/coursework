@@ -1,0 +1,39 @@
+﻿@model PL.Models.EmployeeViewModel
+@{
+    ViewBag.Title = "Delete";
+}
+<h2>Delete</h2>
+<hr />
+@using (Html.BeginForm())
+{
+    <dl>
+        @Html.HiddenFor(m => m.UserId)
+        @Html.HiddenFor(m => m.Id)
+        <dt>Name</dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>Email</dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>Phone</dt>
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt>Salary</dt>
+        <dd>
+            @Html.DisplayFor(model => model.Salary)
+        </dd>
+        <dt>Position</dt>
+        <dd>
+            @Html.DisplayFor(model => model.Position)
+        </dd>
+    </dl>
+
+
+    @Html.ActionLink("Go back", "Index", "Employee", null, new { @class = "btn btn-dark btn-lg" })
+    <input type="submit" value="Delete" class="btn btn-danger btn-lg" />
+}
+
