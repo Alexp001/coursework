@@ -7,10 +7,12 @@ namespace BLL
     public class BllAutofacModule : Module
     {
         private readonly string _connactionString;
+        
         public BllAutofacModule(string connectionString)
         {
             _connactionString = connectionString;
         }
+        
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterModule(new DataAccessAutofacModule(_connactionString));
