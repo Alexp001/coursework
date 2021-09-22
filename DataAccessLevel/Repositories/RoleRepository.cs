@@ -1,7 +1,7 @@
 ﻿using DataAccessLevel.Entities;
-using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 
 namespace DataAccessLevel.Repositories
 {
@@ -15,12 +15,12 @@ namespace DataAccessLevel.Repositories
         public List<Role> GetAll()
         {
             List<Role> roles = new List<Role>();
-            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 string quary = "SELECT id, nameRole FROM Roles";
-                MySqlCommand command = new MySqlCommand(quary, connection);
-                MySqlDataReader reader = command.ExecuteReader();
+                SqlCommand command = new SqlCommand(quary, connection);
+                SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
                     Role role = new Role(reader.GetInt32(0), reader.GetString(1));
@@ -32,15 +32,15 @@ namespace DataAccessLevel.Repositories
         public Role GetById(int id)
         {
             Role role = null;
-            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 string quary = "SELECT id, nameRole FROM Roles WHERE id = @id";
-                MySqlParameter parameter = new MySqlParameter("@id", id);
+                SqlParameter parameter = new SqlParameter("@id", id);
 
-                MySqlCommand command = new MySqlCommand(quary, connection);
+                SqlCommand command = new SqlCommand(quary, connection);
                 command.Parameters.Add(parameter);
-                MySqlDataReader reader = command.ExecuteReader();
+                SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
                     role = new Role(reader.GetInt32(0), reader.GetString(1));
@@ -50,14 +50,14 @@ namespace DataAccessLevel.Repositories
         }
         public int Create(Role item)
         {
-            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                MySqlParameter[] parameters = new MySqlParameter[1];
-                parameters[0] = new MySqlParameter("@nameRole", item.Name);
+                SqlParameter[] parameters = new SqlParameter[1];
+                parameters[0] = new SqlParameter("@nameRole", item.Name);
                 string quary = "INSERT INTO Roles (roleName)" +
-                    " VALUES (@roleName); SELECT LAST_INSERT_ID();";
-                MySqlCommand command = new MySqlCommand(quary, connection);
+                    " VALUES (@roleName); SELECT scope_identity()";
+                SqlCommand command = new SqlCommand(quary, connection);
 
                 foreach (var item1 in parameters)
                 {
@@ -70,15 +70,15 @@ namespace DataAccessLevel.Repositories
 
         public void Update(Role item)
         {
-            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                MySqlParameter[] parameters = new MySqlParameter[2];
-                parameters[0] = new MySqlParameter("@id", item.Id);
-                parameters[1] = new MySqlParameter("@nameRole", item.Name);
+                SqlParameter[] parameters = new SqlParameter[2];
+                parameters[0] = new SqlParameter("@id", item.Id);
+                parameters[1] = new SqlParameter("@nameRole", item.Name);
                 string quary = "UPDATE Roles SET nameRole = @nameRole" +
                     " WHERE id = @id";
-                MySqlCommand command = new MySqlCommand(quary, connection);
+                SqlCommand command = new SqlCommand(quary, connection);
                 foreach (var item1 in parameters)
                 {
                     command.Parameters.Add(item1);
@@ -88,12 +88,12 @@ namespace DataAccessLevel.Repositories
         }
         public void Delete(int id)
         {
-            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 string quary = "DELETE FROM Roles where id=@id";
-                MySqlParameter parameter = new MySqlParameter("@id", id);
-                MySqlCommand command = new MySqlCommand(quary, connection);
+                SqlParameter parameter = new SqlParameter("@id", id);
+                SqlCommand command = new SqlCommand(quary, connection);
                 command.Parameters.Add(parameter);
                 command.ExecuteNonQuery();
             }

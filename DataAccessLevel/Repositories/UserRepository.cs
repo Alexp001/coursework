@@ -1,7 +1,7 @@
 ﻿using DataAccessLevel.Entities;
-using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 
 namespace DataAccessLevel.Repositories
 {
@@ -15,12 +15,12 @@ namespace DataAccessLevel.Repositories
         public List<User> GetAll()
         {
             List<User> users = new List<User>();
-            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 string quary = "SELECT id, userLogin, userPassword FROM Users";
-                MySqlCommand command = new MySqlCommand(quary, connection);
-                MySqlDataReader reader = command.ExecuteReader();
+                SqlCommand command = new SqlCommand(quary, connection);
+                SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
                     User user = new User(reader.GetInt32(0), reader.GetString(1), reader.GetString(2));
@@ -32,15 +32,15 @@ namespace DataAccessLevel.Repositories
         public User GetById(int id)
         {
             User user = null;
-            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 string quary = "SELECT id, userLogin, userPassword FROM Users WHERE id = @id";
-                MySqlParameter parameter = new MySqlParameter("@id", id);
+                SqlParameter parameter = new SqlParameter("@id", id);
 
-                MySqlCommand command = new MySqlCommand(quary, connection);
+                SqlCommand command = new SqlCommand(quary, connection);
                 command.Parameters.Add(parameter);
-                MySqlDataReader reader = command.ExecuteReader();
+                SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
                     user = new User(reader.GetInt32(0), reader.GetString(1), reader.GetString(2));
@@ -50,15 +50,15 @@ namespace DataAccessLevel.Repositories
         }
         public int Create(User item)
         {
-            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                MySqlParameter[] parameters = new MySqlParameter[2];
-                parameters[0] = new MySqlParameter("@userLogin", item.Login);
-                parameters[1] = new MySqlParameter("@userPassword", item.Password);
+                SqlParameter[] parameters = new SqlParameter[2];
+                parameters[0] = new SqlParameter("@userLogin", item.Login);
+                parameters[1] = new SqlParameter("@userPassword", item.Password);
                 string quary = "INSERT INTO Users (userLogin, userPassword)" +
-                    " VALUES (@userLogin, @userPassword); SELECT LAST_INSERT_ID();";
-                MySqlCommand command = new MySqlCommand(quary, connection);
+                    " VALUES (@userLogin, @userPassword); select scope_identity()";
+                SqlCommand command = new SqlCommand(quary, connection);
 
                 foreach (var item1 in parameters)
                 {
@@ -71,16 +71,16 @@ namespace DataAccessLevel.Repositories
 
         public void Update(User item)
         {
-            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                MySqlParameter[] parameters = new MySqlParameter[3];
-                parameters[0] = new MySqlParameter("@id", item.Id);
-                parameters[1] = new MySqlParameter("@userLogin", item.Login);
-                parameters[2] = new MySqlParameter("@userPassword", item.Password);
+                SqlParameter[] parameters = new SqlParameter[3];
+                parameters[0] = new SqlParameter("@id", item.Id);
+                parameters[1] = new SqlParameter("@userLogin", item.Login);
+                parameters[2] = new SqlParameter("@userPassword", item.Password);
                 string quary = "UPDATE Users SET userLogin = @userLogin, userPassword = @userPassword" +
                     " WHERE id = @id";
-                MySqlCommand command = new MySqlCommand(quary, connection);
+                SqlCommand command = new SqlCommand(quary, connection);
                 foreach (var item1 in parameters)
                 {
                     command.Parameters.Add(item1);
@@ -90,12 +90,12 @@ namespace DataAccessLevel.Repositories
         }
         public void Delete(int id)
         {
-            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 string quary = "DELETE FROM Users where id=@id";
-                MySqlParameter parameter = new MySqlParameter("@id", id);
-                MySqlCommand command = new MySqlCommand(quary, connection);
+                SqlParameter parameter = new SqlParameter("@id", id);
+                SqlCommand command = new SqlCommand(quary, connection);
                 command.Parameters.Add(parameter);
                 command.ExecuteNonQuery();
             }

@@ -1,7 +1,7 @@
 ﻿using DataAccessLevel.Entities;
-using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 
 namespace DataAccessLevel.Repositories
 {
@@ -15,12 +15,12 @@ namespace DataAccessLevel.Repositories
         public List<Comment> GetAll()
         {
             List<Comment> comments = new List<Comment>();
-            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 string quary = "SELECT id, textOfComment, kindOfComment, mark, clientId FROM CommentOfClient";
-                MySqlCommand command = new MySqlCommand(quary, connection);
-                MySqlDataReader reader = command.ExecuteReader();
+                SqlCommand command = new SqlCommand(quary, connection);
+                SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
                     Comment comment = new Comment(reader.GetInt32(0), reader.GetString(1), reader.GetString(2),
@@ -33,15 +33,15 @@ namespace DataAccessLevel.Repositories
         public Comment GetById(int id)
         {
             Comment comment = null;
-            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 string quary = "SELECT id, textOfComment, kindOfComment, mark, clientId FROM CommentOfClient WHERE id = @id";
-                MySqlParameter parameter = new MySqlParameter("@id", id);
+                SqlParameter parameter = new SqlParameter("@id", id);
 
-                MySqlCommand command = new MySqlCommand(quary, connection);
+                SqlCommand command = new SqlCommand(quary, connection);
                 command.Parameters.Add(parameter);
-                MySqlDataReader reader = command.ExecuteReader();
+                SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
                     comment = new Comment(reader.GetInt32(0), reader.GetString(1), reader.GetString(2),
@@ -52,17 +52,17 @@ namespace DataAccessLevel.Repositories
         }
         public int Create(Comment item)
         {
-            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                MySqlParameter[] parameters = new MySqlParameter[4];
-                parameters[0] = new MySqlParameter("@textOfComment", item.Text);
-                parameters[1] = new MySqlParameter("@kindOfComment", item.KindOfComment);
-                parameters[2] = new MySqlParameter("@mark", item.Mark);
-                parameters[3] = new MySqlParameter("@clientId", item.ClientId);
+                SqlParameter[] parameters = new SqlParameter[4];
+                parameters[0] = new SqlParameter("@textOfComment", item.Text);
+                parameters[1] = new SqlParameter("@kindOfComment", item.KindOfComment);
+                parameters[2] = new SqlParameter("@mark", item.Mark);
+                parameters[3] = new SqlParameter("@clientId", item.ClientId);
                 string quary = "INSERT INTO CommentOfClient (textOfComment, kindOfComment, mark, clientId)" +
-                    " VALUES (@textOfComment, @kindOfComment, @mark, @clientId); SELECT LAST_INSERT_ID();";
-                MySqlCommand command = new MySqlCommand(quary, connection);
+                    " VALUES (@textOfComment, @kindOfComment, @mark, @clientId); SELECT scope_identity()";
+                SqlCommand command = new SqlCommand(quary, connection);
 
                 foreach (var item1 in parameters)
                 {
@@ -74,19 +74,19 @@ namespace DataAccessLevel.Repositories
         }
         public void Update(Comment item)
         {
-            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                MySqlParameter[] parameters = new MySqlParameter[5];
-                parameters[0] = new MySqlParameter("@id", item.Id);
-                parameters[1] = new MySqlParameter("@textOfComment", item.Text);
-                parameters[2] = new MySqlParameter("@kindOfComment", item.KindOfComment);
-                parameters[3] = new MySqlParameter("@mark", item.Mark);
-                parameters[4] = new MySqlParameter("@clientId", item.ClientId);
+                SqlParameter[] parameters = new SqlParameter[5];
+                parameters[0] = new SqlParameter("@id", item.Id);
+                parameters[1] = new SqlParameter("@textOfComment", item.Text);
+                parameters[2] = new SqlParameter("@kindOfComment", item.KindOfComment);
+                parameters[3] = new SqlParameter("@mark", item.Mark);
+                parameters[4] = new SqlParameter("@clientId", item.ClientId);
                 string quary = "UPDATE CommentOfClient" +
                     " SET textOfComment = @textOfComment, kindOfComment = @kindOfComment, mark = @mark, clientId = @clientId" +
                     " WHERE id = @id";
-                MySqlCommand command = new MySqlCommand(quary, connection);
+                SqlCommand command = new SqlCommand(quary, connection);
                 foreach (var item1 in parameters)
                 {
                     command.Parameters.Add(item1);
@@ -97,12 +97,12 @@ namespace DataAccessLevel.Repositories
 
         public void Delete(int id)
         {
-            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 string quary = "DELETE FROM CommentOfClient where id=@id";
-                MySqlParameter parameter = new MySqlParameter("@id", id);
-                MySqlCommand command = new MySqlCommand(quary, connection);
+                SqlParameter parameter = new SqlParameter("@id", id);
+                SqlCommand command = new SqlCommand(quary, connection);
                 command.Parameters.Add(parameter);
                 command.ExecuteNonQuery();
             }
