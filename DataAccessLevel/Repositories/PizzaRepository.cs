@@ -18,13 +18,13 @@ namespace DataAccessLevel.Repositories
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string quary = "SELECT id, nameOfPizza, price, image FROM Pizza";
+                string quary = "SELECT id, nameOfPizza, price, image, onSale FROM Pizza";
                 SqlCommand command = new SqlCommand(quary, connection);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
                     Pizza pizza = new Pizza(reader.GetInt32(0), reader.GetString(1), (double)reader.GetDecimal(2),
-                        reader["image"].ToString() == "" ? null : reader.GetString(3));
+                        reader["image"].ToString() == "" ? null : reader.GetString(3), reader.GetBoolean(4));
                     pizzas.Add(pizza);
                 }
             }
@@ -36,7 +36,7 @@ namespace DataAccessLevel.Repositories
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string quary = "SELECT id, nameOfPizza, price, image FROM Pizza WHERE id = @id";
+                string quary = "SELECT id, nameOfPizza, price, image, onSale FROM Pizza WHERE id = @id";
                 SqlParameter parameter = new SqlParameter("@id", id);
 
                 SqlCommand command = new SqlCommand(quary, connection);
@@ -44,8 +44,8 @@ namespace DataAccessLevel.Repositories
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    pizza = new Pizza(reader.GetInt32(0), reader.GetString(1),
-                        (double)reader.GetDecimal(2), reader["Image"].ToString() == "" ? null : (string)reader.GetValue(3));
+                    pizza = new Pizza(reader.GetInt32(0), reader.GetString(1), (double)reader.GetDecimal(2),
+                        reader["Image"].ToString() == "" ? null : (string)reader.GetValue(3), reader.GetBoolean(4));
                 }
             }
             return pizza;
@@ -55,12 +55,14 @@ namespace DataAccessLevel.Repositories
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                SqlParameter[] parameters = new SqlParameter[3];
+                SqlParameter[] parameters = new SqlParameter[4];
                 parameters[0] = new SqlParameter("@nameOfPizza", item.Name);
                 parameters[1] = new SqlParameter("@price", item.Price);
                 parameters[2] = new SqlParameter("@image", item.Image);
-                string quary = "INSERT INTO Pizza (nameOfPizza, price, image)" +
-                    " VALUES (@nameOfPizza, @price, @image); SELECT scope_identity()";
+                parameters[3] = new SqlParameter("@onSale", item.OnSale);
+
+                string quary = "INSERT INTO Pizza (nameOfPizza, price, image, onSale)" +
+                    " VALUES (@nameOfPizza, @price, @image, @onSale); SELECT scope_identity()";
                 SqlCommand command = new SqlCommand(quary, connection);
 
                 foreach (var item1 in parameters)
@@ -77,13 +79,14 @@ namespace DataAccessLevel.Repositories
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                SqlParameter[] parameters = new SqlParameter[4];
+                SqlParameter[] parameters = new SqlParameter[5];
                 parameters[0] = new SqlParameter("@id", item.Id);
                 parameters[1] = new SqlParameter("@nameOfPizza", item.Name);
                 parameters[2] = new SqlParameter("@price", item.Price);
                 parameters[3] = new SqlParameter("@image", item.Image);
-                string quary = "UPDATE Pizza SET nameOfPizza = @nameOfPizza, price = @price, image = @image" +
-                    " WHERE id = @id";
+                parameters[4] = new SqlParameter("@onSale", item.OnSale);
+                string quary = "UPDATE Pizza SET nameOfPizza = @nameOfPizza, price = @price, image = @image," +
+                    " onSale = @onSale WHERE id = @id";
                 SqlCommand command = new SqlCommand(quary, connection);
                 foreach (var item1 in parameters)
                 {

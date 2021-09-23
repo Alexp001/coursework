@@ -6,12 +6,14 @@
         public string Name { get; set; }
         public double Price { get; set; }
         public string Image { get; set; }
-        public Pizza(int id, string name, double price, string image)
+        public bool OnSale { get; set; }
+        public Pizza(int id, string name, double price, string image, bool onSale)
         {
             Id = id;
             Name = name;
             Price = price;
             Image = image;
+            OnSale = onSale;
         }
     }
 }

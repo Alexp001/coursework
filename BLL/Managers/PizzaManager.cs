@@ -18,7 +18,7 @@ namespace BLL.Managers
         }
         public ICollection<PizzaDto> GetAll()
         {
-            return _mapper.Map<IEnumerable<PizzaDto>>(_pizzaRepository.GetAll()).ToList();
+            return _mapper.Map<IEnumerable<PizzaDto>>(_pizzaRepository.GetAll()).Where(p => p.OnSale).ToList();
         }
         public PizzaDto GetById(int id)
         {
@@ -26,6 +26,7 @@ namespace BLL.Managers
         }
         public int Create(PizzaDto pizza)
         {
+            pizza.OnSale = true;
             return _pizzaRepository.Create(_mapper.Map<Pizza>(pizza));
         }
         public void Update(PizzaDto pizza)
@@ -34,7 +35,11 @@ namespace BLL.Managers
         }
         public void Delete(int id)
         {
-            _pizzaRepository.Delete(id);
+            var pizza = _mapper.Map<PizzaDto>(_pizzaRepository.GetById(id));
+
+            pizza.OnSale = false;
+
+            _pizzaRepository.Update(_mapper.Map<Pizza>(pizza));
         }
     }
 }

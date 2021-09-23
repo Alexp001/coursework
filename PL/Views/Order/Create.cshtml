@@ -3,27 +3,49 @@
     ViewBag.Title = "Make an order";
 }
 
+<style>
+    .block {
+        visibility: hidden
+    }
+
+    .holder:hover .block {
+        visibility: visible
+    }
+
+    .block:hover {
+        visibility: visible
+    }
+
+    .grow:hover {
+        -webkit-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        transform: scale(1.05);
+    }
+</style>
+
 <h2>@ViewBag.Title</h2>
 <hr />
-<div class="container d-flex flex-wrap">
-    @if (Model != null)
-    {
-        foreach (var item in Model)
+@if (Model != null)
+{
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+
+        @foreach (var item in Model)
         {
-            <div class=" float-left col-sm-3" style="height: 310px">
-                <img src="@item.Image" width="207" height="207" alt="No image" class="center-block">
-                <h4 class="text-center">@item.Name</h4>
-                <div class="float-left text-center col-lg-5" style="">
-                    @item.Price $
-                </div>
-                <div class="center-block">
-                    @Html.ActionLink("Choose", "AddPizza", "Order", new { id = item.Id, name = item.Name, price = item.Price, image = item.Image }, new { @class = "btn btn-warning" })
+            <div class="col">
+                <div class="card mb-3 shadow holder grow h-100">
+                    <img src="@item.Image" class="card-img-top" />
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text overflow-multiply">Price: @item.Price $</p>
+                        <div class="block">
+                            @Html.ActionLink("Choose", "AddPizza", "Order", new { id = item.Id, name = item.Name, price = item.Price, image = item.Image }, new { @class = "btn btn-warning stretched-link" })
+                        </div>
+                    </div>
                 </div>
             </div>
         }
-    }
-
-</div>
+    </div>
+}
 <br />
 <hr />
 

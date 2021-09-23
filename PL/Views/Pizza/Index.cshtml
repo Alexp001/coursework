@@ -15,38 +15,59 @@
         roles = JsonSerializer.Deserialize<UserRoleViewModel>(HttpContext.Current.Request.Cookies["user"].Value).Roles;
     }
 
-    string mb= String.Empty;
+    string mb = String.Empty;
     if (RolesManager.IsPizzaManager(roles))
     {
         mb = "mb-4";
     }
 }
+<style>
+    .block {
+        visibility: hidden
+    }
+
+    .holder:hover .block {
+        visibility: visible
+    }
+
+    .block:hover {
+        visibility: visible
+    }
+
+    .grow:hover {
+        -webkit-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        transform: scale(1.05);
+    }
+</style>
 
 <h2>@ViewBag.Title</h2>
 <hr />
-<div class="container d-flex flex-wrap">
-    @if (Model != null)
-    {
-        foreach (var item in Model)
+@if (Model != null)
+{
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+
+        @foreach (var item in Model)
         {
-            <div class=" float-left col-sm-3 @mb" style="height: 310px">
-                <img src="@item.Image" width="207" height="207" alt="No image" class="center-block">
-                <h4 class="text-center">@item.Name</h4>
-                <div class="text-center" style="">
-                    @Html.LabelFor(m => item.Price, "Price:")
-                    @item.Price $
-                </div>
-                @if (RolesManager.IsPizzaManager(roles))
-                {
-                    <div class="text-center">
-                        @Html.ActionLink("Update", "Update", "Pizza", new { id = item.Id, }, new { @class = "btn btn-warning" })
-                        @Html.ActionLink("Delete", "Delete", "Pizza", new { id = item.Id, }, new { @class = "btn btn-danger" })
+            <div class="col">
+                <div class="card mb-3 shadow holder grow h-100">
+                    <img src="@item.Image" class="card-img-top" />
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text overflow-multiply">Price: @item.Price $</p>
+                        @if (RolesManager.IsPizzaManager(roles))
+                        {
+                            <div class="block">
+                                @Html.ActionLink("Update", "Update", "Pizza", new { id = item.Id, }, new { @class = "btn btn-warning" })
+                                @Html.ActionLink("Delete", "Delete", "Pizza", new { id = item.Id, }, new { @class = "btn btn-danger" })
+                            </div>
+                        }
                     </div>
-                }
+                </div>
             </div>
         }
-    }
-</div>
+    </div>
+}
 @if (RolesManager.IsPizzaManager(roles))
 {
     <hr />

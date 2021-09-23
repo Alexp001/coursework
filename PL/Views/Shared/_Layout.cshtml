@@ -24,54 +24,50 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body style="padding:0">
-    <div class="navbar fixed-top navbar-expand-sm navbar-light bg-dark border-bottom box-shadow mb-3">
+    <div class="navbar fixed-top navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
         <div class="container">
-            <div class="navbar-header">
-                @Html.ActionLink("Pizzeria", "Index", "Home", new { area = "" }, new { @class = "navbar-brand text-white" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Catalog", "Index", "Pizza", null, new { @class = "nav-link text-white" })</li>
-                    <li>@Html.ActionLink("Comments", "Index", "Comment", null, new { @class = "nav-link text-white" })</li>
+            @Html.ActionLink("Pizzeria", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">@Html.ActionLink("Catalog", "Index", "Pizza", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Comments", "Index", "Comment", null, new { @class = "nav-link" })</li>
                     @if (RolesManager.IsUser(roles))
                     {
-                        <li>@Html.ActionLink("Make an order", "Create", "Order", null, new { @class = "nav-link text-white" })</li>
-                        <li>@Html.ActionLink("My orders", "Index", "MyOrders", null, new { @class = "nav-link text-white" })</li>
+                        <li class="nav-item">@Html.ActionLink("Make an order", "Create", "Order", null, new { @class = "nav-link" })</li>
+                        <li class="nav-item">@Html.ActionLink("My orders", "Index", "MyOrders", null, new { @class = "nav-link" })</li>
                     }
                     @if (RolesManager.IsReciver(roles))
                     {
-                        <li>@Html.ActionLink("Take orders", "ShowOrder", "Order", null, new { @class = "nav-link text-white" })</li>
+                        <li class="nav-item">@Html.ActionLink("Take orders", "ShowOrder", "Order", null, new { @class = "nav-link" })</li>
                     }
                     @if (RolesManager.IsExecutor(roles))
                     {
-                        <li>@Html.ActionLink("Сomplete order", "ShowOrderForExecutor", "Order", null, new { @class = "nav-link text-white" })</li>
+                        <li class="nav-item">@Html.ActionLink("Сomplete order", "ShowOrderForExecutor", "Order", null, new { @class = "nav-link" })</li>
                     }
                     @if (RolesManager.IsEmployeeManager(roles))
                     {
-                        <li>@Html.ActionLink("Employees", "Index", "Employee", null, new { @class = "nav-link text-white" })</li>
+                        <li class="nav-item">@Html.ActionLink("Employees", "Index", "Employee", null, new { @class = "nav-link" })</li>
                     }
                     @if (RolesManager.IsClientManager(roles))
                     {
-                        <li>@Html.ActionLink("Clients", "Index", "Client", null, new { @class = "nav-link text-white" })</li>
+                        <li class="nav-item">@Html.ActionLink("Clients", "Index", "Client", null, new { @class = "nav-link" })</li>
                     }
                     @if (RolesManager.IsAccountant(roles))
                     {
-                        <li>@Html.ActionLink("Reports", "Index", "Report", null, new { @class = "nav-link text-white" })</li>
+                        <li class="nav-item">@Html.ActionLink("Reports", "Index", "Report", null, new { @class = "nav-link" })</li>
                     }
                 </ul>
-
-                <div class=" navbar-collapse collapse d-sm-inline-flex flex-lg-row-reverse">
+                <div>
                     <ul class="navbar-nav flex-grow-1">
-
                         @if (login)
                         {
 
-                            <li>@Html.ActionLink("Sign in", "Index", "Login", null, new { @class = "nav-link text-white" })</li>
-                            <li>@Html.ActionLink("Sign up", "Create", "Client", null, new { @class = "nav-link text-white" })</li>
+                            <li class="nav-item">@Html.ActionLink("Sign in", "Index", "Login", null, new { @class = "nav-link" })</li>
+                            <li class="nav-item">@Html.ActionLink("Sign up", "Create", "Client", null, new { @class = "nav-link" })</li>
                         }
                         else
                         {
-                            <li>@Html.ActionLink("Account", "Index", "Account", null, new { @class = "nav-link text-white" })</li>
+                            <li class="nav-item">@Html.ActionLink("Account", "Index", "Account", null, new { @class = "nav-link" })</li>
                         }
                     </ul>
                 </div>
@@ -87,8 +83,13 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/ticketSite.js" asp-append-version="true"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.."></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive.."></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
